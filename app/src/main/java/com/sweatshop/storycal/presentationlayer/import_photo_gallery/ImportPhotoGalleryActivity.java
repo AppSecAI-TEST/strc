@@ -1,6 +1,7 @@
 package com.sweatshop.storycal.presentationlayer.import_photo_gallery;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -26,11 +27,15 @@ import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
 import com.sweatshop.storycal.presentationlayer.edit.EditPostActivity;
+import com.sweatshop.storycal.presentationlayer.home.MainActivity;
 import com.sweatshop.storycal.presentationlayer.homepage.HomepageActivity;
 import com.sweatshop.storycal.presentationlayer.import_photo_camera.ImportPhotoCameraActivity;
 import com.sweatshop.storycal.presentationlayer.main_year.MainYearActivity;
 
+import java.util.ArrayList;
 import java.util.Random;
+
+import static android.os.Build.VERSION_CODES.M;
 
 public class ImportPhotoGalleryActivity extends AppCompatActivity {
 
@@ -68,7 +73,7 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.action_bar_import_photos);
-        View view =getSupportActionBar().getCustomView();
+        View view = getSupportActionBar().getCustomView();
 
         TextView leftActionBtn= (TextView)view.findViewById(R.id.action_random);
         leftActionBtn.setOnClickListener(new View.OnClickListener() {
@@ -77,16 +82,6 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
                 imageAdapter.selectRandomFive();
             }
         });
-    }
-
-    public void goToFeed(View view) {
-        Intent intent = new Intent(ImportPhotoGalleryActivity.this, HomepageActivity.class);
-        startActivity(intent);
-    }
-
-    public void backToMonth(View view) {
-        Intent intent = new Intent(ImportPhotoGalleryActivity.this, MainYearActivity.class);
-        startActivity(intent);
     }
 
     public void addPhoto() {}
@@ -214,28 +209,28 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                final int len = thumbnailsselection.length;
-                int cnt = 0;
-                String selectImages = "";
-                for (int i = 0; i < len; i++)
-                {
-                    if (thumbnailsselection[i]){
-                        cnt++;
-                        selectImages = selectImages + arrPath[i] + "|";
-                    }
-                }
-                if (cnt == 0){
-                    Toast.makeText(getApplicationContext(),
-                            "Please select at least one image",
-                            Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "You've selected Total " + cnt + " image(s).",
-                            Toast.LENGTH_LONG).show();
-                    Log.d("SelectedImages", selectImages);
-                }
-                Intent intent = new Intent(ImportPhotoGalleryActivity.this, EditPostActivity.class);
-                startActivity(intent);
+//                final int len = thumbnailsselection.length;
+//                int cnt = 0;
+//                String selectImages = "";
+//                for (int i = 0; i < len; i++) {
+//                    if (thumbnailsselection[i]){
+//                        cnt++;
+//                        selectImages = selectImages + arrPath[i] + "|";
+//                    }
+//                }
+//                if (cnt == 0){
+//                    Toast.makeText(getApplicationContext(),
+//                            "Please select at least one image",
+//                            Toast.LENGTH_LONG).show();
+//                } else {
+//                    Toast.makeText(getApplicationContext(),
+//                            "You've selected Total " + cnt + " image(s).",
+//                            Toast.LENGTH_LONG).show();
+//                    Log.d("SelectedImages", selectImages);
+//                }
+//                Intent intent = new Intent(ImportPhotoGalleryActivity.this, EditPostActivity.class);
+//                startActivity(intent);
+                importSelectedPictures();
             }
         });
     }
@@ -258,6 +253,14 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
     }
 
     public void importSelectedPictures() {
-
+        ArrayList<Bitmap> selectedPictures = new ArrayList<Bitmap>();
+        for(int i = 0; i < count; i++) {
+            if(thumbnailsselection[i]) {
+                selectedPictures.add(thumbnails[i]);
+            }
+        }
+        Intent intent = new Intent(ImportPhotoGalleryActivity.this, EditPostActivity.class);
+        intent.putExtra("selectedPictures", selectedPictures);
+        startActivity(intent);
     }
 }
