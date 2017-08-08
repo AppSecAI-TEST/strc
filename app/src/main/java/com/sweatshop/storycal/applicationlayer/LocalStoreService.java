@@ -13,6 +13,7 @@ import com.sweatshop.storycal.infrastructurelayer.localStore.localDb.databaseCon
  */
 
 public class LocalStoreService {
+    
     public void addLoginUserToLocalStore(User user) {
         ContentValues values = new ContentValues();
         values.put(LoginUserContract._ID, user.getId());
@@ -21,10 +22,11 @@ public class LocalStoreService {
         values.put(LoginUserContract.COL_PASSWORD, user.getPassword());
         values.put(LoginUserContract.COL_EMAIL, user.getEmail());
         values.put(LoginUserContract.COL_NUM_OF_STORIES, user.getNumOfStories());
+        values.put(LoginUserContract.COL_USER, 1);
         LocalDbAdapter.getDatabase().insert(LoginUserContract.LOGIN_USER_TABLE, null, values);
     }
 
-    public User getUserFromLocalStore(long id) {
+    public User getUserFromLocalStore() {
 
         final String[] columns = {
                 UserContract._ID,
@@ -38,8 +40,8 @@ public class LocalStoreService {
         final Cursor cursor = LocalDbAdapter.getDatabase().query(
                 LoginUserContract.LOGIN_USER_TABLE,
                 columns,
-                UserContract._ID + "=?",
-                new String[]{Long.toString(id)},
+                LoginUserContract.COL_USER + "=?",
+                new String[]{Long.toString(1)},
                 null,
                 null,
                 null
@@ -60,4 +62,9 @@ public class LocalStoreService {
 
         return user;
     }
+
+    public void RemoveUserFromLocalStore() {
+        LocalDbAdapter.getDatabase().delete(LoginUserContract.LOGIN_USER_TABLE, LoginUserContract.COL_USER + "=?", new String[]{Long.toString(1)});
+    }
+
 }

@@ -21,14 +21,9 @@ public class MainMonthViewModel extends BaseObservable {
 
     public MainMonthViewModel(MainMonthActivity mainMonthActivity, User user, UserService userService) {
         this.mainMonthActivity = mainMonthActivity;
-        this.user = user;
-        this.userService = userService;
         LocalStoreService localStoreService = new LocalStoreService();
-        Bundle bundle = mainMonthActivity.getIntent().getExtras();
-        if(bundle != null) {
-            this.user = localStoreService.getUserFromLocalStore(Long.parseLong(bundle.getString("login_user_id")));
-            Toast.makeText(mainMonthActivity,"User: " + user.getUsername(),Toast.LENGTH_LONG).show();
-        }
+        this.user = localStoreService.getUserFromLocalStore();
+        this.userService = userService;
     }
 
     @Bindable
