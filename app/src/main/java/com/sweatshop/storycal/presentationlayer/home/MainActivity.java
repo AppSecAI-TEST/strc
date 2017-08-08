@@ -88,14 +88,14 @@ public class MainActivity extends AppCompatActivity {
 
         albumCategories = repository.findAlbumCategory(mainViewModel.GetUser().getId());
 
-        albumCategories.add(new AlbumCategory(0, 0, "2017"));
-        albumCategories.add(new AlbumCategory(0, 0, "2016"));
-        albumCategories.add(new AlbumCategory(0, 0, "2015"));
-        albumCategories.add(new AlbumCategory(0, 0, "2014"));
-        albumCategories.add(new AlbumCategory(0, 0, "2013"));
-        albumCategories.add(new AlbumCategory(0, 0, "2012"));
-        albumCategories.add(new AlbumCategory(0, 0, "2011"));
-        albumCategories.add(new AlbumCategory(0, 0, "2010"));
+//        albumCategories.add(new AlbumCategory(0, 0, "2017"));
+//        albumCategories.add(new AlbumCategory(0, 0, "2016"));
+//        albumCategories.add(new AlbumCategory(0, 0, "2015"));
+//        albumCategories.add(new AlbumCategory(0, 0, "2014"));
+//        albumCategories.add(new AlbumCategory(0, 0, "2013"));
+//        albumCategories.add(new AlbumCategory(0, 0, "2012"));
+//        albumCategories.add(new AlbumCategory(0, 0, "2011"));
+//        albumCategories.add(new AlbumCategory(0, 0, "2010"));
 
         albumCategoryView.setAdapter(new AlbumCategoryRecyclerAdapter(this, albumCategories));
 
