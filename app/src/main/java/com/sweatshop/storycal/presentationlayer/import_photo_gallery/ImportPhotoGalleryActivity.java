@@ -32,9 +32,6 @@ import com.sweatshop.storycal.presentationlayer.main_year.MainYearActivity;
 
 import java.util.Random;
 
-import static android.R.id.list;
-import static com.sweatshop.storycal.R.id.view;
-
 public class ImportPhotoGalleryActivity extends AppCompatActivity {
 
     private int count;
@@ -77,7 +74,7 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
         leftActionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageAdapter.checkRandomFive();
+                imageAdapter.selectRandomFive();
             }
         });
     }
@@ -159,7 +156,7 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
             return convertView;
         }
 
-        public void checkRandomFive() {
+        public void selectRandomFive() {
             Random r = new Random();
             int[] randomIndexes = new int[5];
             for(int i = 0; i < 5; i++) {
@@ -179,7 +176,6 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
             }
             imageAdapter.notifyDataSetChanged();
         }
-
     }
 
     class ViewHolder {
@@ -261,5 +257,7 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void importSelectedPictures() {
 
+    }
 }
