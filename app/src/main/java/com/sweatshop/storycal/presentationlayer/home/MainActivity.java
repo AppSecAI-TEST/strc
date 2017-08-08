@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView albumCategoryView;
     private GridLayoutManager gridLayoutManager;
     private List<AlbumCategory> albumCategories;
+    private MainViewModel mainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        binding.setMain(new MainViewModel(this, new User(),new UserServiceImpl(new UserRepositoryImpl(), new PostRepositoryImpl())));
+        binding.setMain(mainViewModel = new MainViewModel(this, new User(),new UserServiceImpl(new UserRepositoryImpl(), new PostRepositoryImpl())));
 
         setUpActionBar();
         setRecyclerView();
@@ -82,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
     private void setRecyclerView() {
         albumCategoryView = (RecyclerView) findViewById(R.id.albumCategory);
         albumCategories = new LinkedList<>();
+
+        UserRepositoryImpl repository = new UserRepositoryImpl();
+
+        albumCategories = repository.findAlbumCategory(mainViewModel.GetUser().getId());
 
         albumCategories.add(new AlbumCategory(0, 0, "2017"));
         albumCategories.add(new AlbumCategory(0, 0, "2016"));
