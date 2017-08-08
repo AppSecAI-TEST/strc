@@ -110,9 +110,9 @@ public class InstrumentedUserTests {
 
         UserRepositoryImpl userRepository = new UserRepositoryImpl();
 
-        userRepository.addPhotoToAlbum(2, "August", "2019", "test photo");
+        userRepository.addPhotoToAlbum(1, "August", "2019", "test photo");
 
-        AlbumCategory albumCategory = userRepository.findAlbumCategory(2, "2019");
+        AlbumCategory albumCategory = userRepository.findAlbumCategory(1, "2019");
 
         Assert.assertNotNull(albumCategory);
 
