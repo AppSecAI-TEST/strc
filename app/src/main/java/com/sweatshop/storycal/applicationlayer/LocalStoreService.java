@@ -21,6 +21,7 @@ public class LocalStoreService {
         values.put(LoginUserContract.COL_PASSWORD, user.getPassword());
         values.put(LoginUserContract.COL_EMAIL, user.getEmail());
         values.put(LoginUserContract.COL_NUM_OF_STORIES, user.getNumOfStories());
+        values.put(LoginUserContract.COL_USER, 1);
         LocalDbAdapter.getDatabase().insert(LoginUserContract.LOGIN_USER_TABLE, null, values);
     }
 
@@ -60,4 +61,5 @@ public class LocalStoreService {
 
         return user;
     }
+
 }

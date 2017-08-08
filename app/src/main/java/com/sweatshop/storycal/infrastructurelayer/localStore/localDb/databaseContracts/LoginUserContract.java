@@ -15,6 +15,7 @@ public final class LoginUserContract implements BaseColumns {
     public final static String COL_NUM_OF_STORIES = "num_of_stories";
     public final static String COL_NUM_OF_FOLLOWERS = "num_of_followers";
     public final static String COL_NUM_OF_FOLLOWING = "num_of_following";
+    public final static String COL_USER = "login_user";
     public final static String CREATE_TABLE =
             "CREATE TABLE " + LOGIN_USER_TABLE + " (" +
                     _ID + " INTEGER," +
@@ -22,7 +23,8 @@ public final class LoginUserContract implements BaseColumns {
                     COL_USERNAME + " TEXT," +
                     COL_PASSWORD + " TEXT," +
                     COL_NUM_OF_STORIES + " INTEGER," +
-                    COL_EMAIL + " TEXT)";
+                    COL_EMAIL + " TEXT," +
+                    COL_USER + " INTEGER)";
 
     private  LoginUserContract() {}
 
