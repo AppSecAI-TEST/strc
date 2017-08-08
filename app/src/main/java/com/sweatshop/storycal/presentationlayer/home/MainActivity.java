@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ImageView imageButton = (ImageView)view.findViewById(R.id.logo);
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        ImageView logo = (ImageView)view.findViewById(R.id.logo);
+        logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new LogoutViewModel().logout(v.getContext());
