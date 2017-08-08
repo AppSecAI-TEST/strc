@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Strc-demo-akongv3.iml" filepath="$PROJECT_DIR$/Strc-demo-akongv3.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/strc.iml" filepath="$PROJECT_DIR$/strc.iml" />
     </modules>
   </component>
 </project>
