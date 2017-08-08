@@ -234,6 +234,41 @@ public class UserRepositoryImpl implements UserRepository {
         return albumCategory;
     }
 
+    public List<AlbumCategory> findAlbumCategory(long userId) {
+        final String[] columnsToQuery = {
+                AlbumCategoryContract._ID,
+                AlbumCategoryContract.COL_USER_ID,
+                AlbumCategoryContract.COL_YEAR
+        };
+
+        final Cursor cursor = LocalDbAdapter.getDatabase().query(
+                AlbumCategoryContract.TABLE_NAME,
+                columnsToQuery,
+                AlbumCategoryContract.COL_USER_ID + "=?",
+                new String[] {Long.toString(userId)},
+                null,
+                null,
+                null
+        );
+
+        if(!cursor.moveToFirst()) {
+            return null;
+        }
+
+        List<AlbumCategory> albumCategories = new LinkedList<AlbumCategory>();
+        AlbumCategory albumCategory = null;
+
+        while (cursor.moveToNext()) {
+            albumCategory = new AlbumCategory();
+            albumCategory.setId(cursor.getLong(0));
+            albumCategory.setUser_id(cursor.getLong(1));
+            albumCategory.setYear(cursor.getString(2));
+            albumCategories.add(albumCategory);
+        }
+        
+        return albumCategories;
+    }
+
     public List<AlbumCategory> getAlbumCategory(long userId) {
         String[] columnsQueary =  {
                 AlbumCategoryContract._ID,
@@ -261,12 +296,6 @@ public class UserRepositoryImpl implements UserRepository {
         while(cursor.moveToNext()) {
             albumCategories.add(new AlbumCategory(cursor.getLong(0), cursor.getLong(1), cursor.getString(2)));
         }
-
-        columnsQueary = new String[] {
-                AlbumContract._ID,
-                AlbumContract.COL_ALBUM_CATEGORY_ID,
-                AlbumContract.COL_MONTH
-        };
 
         for(AlbumCategory albumCategory : albumCategories) {
             albumCategory.setAlbums(findAlbums(albumCategory.getId()));

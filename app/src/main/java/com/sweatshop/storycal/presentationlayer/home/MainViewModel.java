@@ -27,6 +27,8 @@ public class MainViewModel extends BaseObservable {
         this.user = localStoreService.getUserFromLocalStore();
     }
 
+    public User GetUser() { return user; }
+
     @Bindable
     public String getName() {
         return user.getName();
