@@ -121,6 +121,7 @@ public class MainYearActivity extends AppCompatActivity {
     public void backToYear(View view) {
         Intent intent = new Intent(MainYearActivity.this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void addPhoto() {}

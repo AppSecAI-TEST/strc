@@ -79,7 +79,10 @@ public class MainMonthActivity extends AppCompatActivity {
 
     public void backToMonth(View view) {
         Intent intent = new Intent(MainMonthActivity.this, MainYearActivity.class);
+        intent.putExtra("album_id", getIntent().getExtras().getLong("album_id"));
+        intent.putExtra("album_category_id", getIntent().getExtras().getLong("album_category_id"));
         startActivity(intent);
+        finish();
     }
 
     public void addPhoto() {}
