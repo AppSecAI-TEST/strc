@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.sweatshop.storycal.R;
 import com.sweatshop.storycal.applicationlayer.LocalStoreService;
 import com.sweatshop.storycal.domainlayer.Album.Album;
 import com.sweatshop.storycal.domainlayer.User.User;
+import com.sweatshop.storycal.presentationlayer.LogoutViewModel;
 import com.sweatshop.storycal.presentationlayer.home.MainActivity;
 import com.sweatshop.storycal.presentationlayer.homepage.HomepageActivity;
 import com.sweatshop.storycal.presentationlayer.main_month.MainMonthActivity;
@@ -59,6 +61,14 @@ public class MainYearActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(),"Settings",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        ImageView logo = (ImageView)view.findViewById(R.id.logo);
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new LogoutViewModel().logout(v.getContext());
             }
         });
     }
