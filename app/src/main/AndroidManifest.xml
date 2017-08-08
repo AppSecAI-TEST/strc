@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.sweatshop.storycal">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".presentationlayer.login.LoginActivity">
+            <provider
+                android:name="android.support.v4.content.FileProvider"
+                android:authorities="com.example.android.fileprovider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+                <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths" />
+            </provider>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".presentationlayer.register.RegisterActivity" />
+        <activity android:name=".presentationlayer.enter_email.EnterEmailActivity" />
+        <activity android:name=".presentationlayer.enter_info.EnterInfoActivity" />
+        <activity android:name=".presentationlayer.enter_username.EnterUsernameActivity" />
+        <activity android:name=".presentationlayer.base_activity.BaseActivity" />
+        <activity android:name=".presentationlayer.fb_popup.FBPopupActivity" />
+        <activity android:name=".presentationlayer.contact_friends.ContactFriendsActivity" />
+        <activity android:name=".presentationlayer.fb_friends.FBFriendsActivity" />
+        <activity android:name=".presentationlayer.fb_friends2.FBFriendsPopup2Activity" />
+        <activity android:name=".presentationlayer.posts.PostsActivity" />
+        <activity android:name=".presentationlayer.edit.EditPostActivity" />
+        <activity android:name=".presentationlayer.profile_picture.ProfilePictureActivity" />
+
+        <activity android:name=".presentationlayer.import_photo_camera.ImportPhotoCameraActivity" />
+        <activity android:name=".presentationlayer.import_photo_gallery.ImportPhotoGalleryActivity" />
+        <activity android:name=".presentationlayer.import_profile_pic.ImportProfilePictureActivity" />
+        <activity android:name=".presentationlayer.home.MainActivity" />
+        <activity android:name=".presentationlayer.main_year.MainYearActivity" />
+        <activity android:name=".presentationlayer.main_month.MainMonthActivity" />
+        <activity android:name=".presentationlayer.homepage.HomepageActivity" />
+        <activity android:name=".presentationlayer.create_post.CreatePostActivity" />
+        <activity android:name=".presentationlayer.gallery.GalleryActivity" />
+        <activity android:name=".presentationlayer.gallery_full_image.GalleryFullImageActivity" />
+        <activity android:name=".presentationlayer.face_detection.FaceDetectionActivity" />
+    </application>
+
+</manifest>

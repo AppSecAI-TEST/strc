@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="colorPrimary">@color/white</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#ff4081</color>
+    <color name="facebook">#3b5998</color>
+    <color name="twitter">#1da1f3</color>
+    <color name="customEmail">#57c2ba</color>
+    <color name="ustomEmail2">#57c2ba</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="darkGray">#2d3036</color>
+    <color name="black_overlay_lighter">#d8d8d8</color>
+    <color name="black_overlay_darker">#af000000</color>
+
+    <color name="picker_background">#3F51B5</color>
+    <color name="picker_button_background_selected">#3F51B5</color>
+    <color name="picker_button_background">@android:color/white</color>
+    <color name="picker_button_background_innactive">#BDBDBD</color>
+    <color name="picker_default_text_color">#999</color>
+    <color name="picker_default_selected_text_color">@android:color/black</color>
+    <color name="picker_default_selector_color">#646464</color>
+    <color name="obj_c_color">#337ffc</color>
+    <color name="black_overlay_opaque">#6d777777</color>
+</resources>

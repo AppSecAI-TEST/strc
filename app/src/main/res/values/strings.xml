@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">Storycal</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="title_activity_fbfriends_popup">FBFriendsPopup</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="italic_hint1"><i><b>Add Title...</b></i></string>
+    <string name="italic_hint2"><i>Write message...</i></string>
+
+    <string name="picker_today">Today</string>
+    <string name="picker_am">AM</string>
+    <string name="picker_pm">PM</string>
+
+    <!-- Profile Pictures -->
+    <string name="prof_pic_details">Add a photo so your friends will know it\'s you.</string>
+    <string name="prof_pic_btn">Add a Photo</string>
+
+    <!--Import Photo gallery -->
+    <string name="importPhotoGallery_txt1">Import Your</string>
+    <string name="importPhotoGallery_txt2">Photos</string>
+    <string name="importPhotoGallery_Gallery_grid"></string>
+    <string name="importPhotoGallery_Gallery_btn">Gallery</string>
+    <string name="importPhotoGallery_Camera_btn">Camera</string>
+    <string name="importPhotoGallery_Web_btn">Web</string>
+
+    <!--Import Photo Camera -->
+    <string name="importPhotoCamera_Gallery_btn">Gallery</string>
+    <string name="importPhotoCamera_Camera_btn">Camera</string>
+    <string name="importPhotoCamera_Web_btn">Web</string>
+
+    <string name="postQuoteHint">Post a quotation...</string>
+    <string name="writeCaptionHint">Write something...</string>
+
+    <string name="cancel">CANCEL</string>
+    <string name="post">POST</string>
+
+    <string name="facebook_app_id">[APP_ID]</string>
+    <string name="fb_login_protocol_scheme">fb[APP_ID]</string>
+    <string name="faceDetection_btn">Detect Face</string>
+
+    <!-- Date -->
+    <string name="dummy_date">Aug 4, 2017</string>
+
+    <!-- Login -->
+    <string name="login_signup">Not a member? <b>Signup</b></string>
+
+    <!--Main Page -->
+    <string name="profileName_lbl">none</string>
+    <string name="ageWork_lbl">none</string>
+    <string name="location_lbl">Location</string>
+    <string name="stories_lbl">0</string>
+    <string name="followers_lbl">0</string>
+    <string name="following_lbl">0</string>
+
+    <string name="storiesTxt">Stories</string>
+    <string name="followersTxt">Followers</string>
+    <string name="followingTxt">Following</string>
+
+    <string name="profileName_img">ProfileNameImage</string>
+    <string name="homepage_profile_btn">homepage button</string>
+    <string name="notification_profile_btn">location button</string>
+    <string name="bookmark_profile_btn">tag button</string>
+    <string name="search_profile_btn">search button</string>
+    <string name="address">Orlando, Fl</string>
+
+
+    <!--Homepage -->
+    <string name="quote_homepage_btn">quote button</string>
+    <string name="notification_homepage_btn">notification button</string>
+    <string name="messages_homepage_btn">messages button</string>
+    <string name="search_homepage_btn">search button</string>
+
+    <!-- Action Bar -->
+    <string name="done_action_bar">DONE</string>
+    <string name="skip_action_bar">SKIP</string>
+    <string name="random_five">RANDOM FIVE</string>
+    <string name="import_">IMPORT</string>
+
+    <!-- FB Friends -->
+    <string name="follow_all">Follow All</string>
+
+    <string name="app_id" translatable="false">1996543270568600</string>
+
+</resources>
