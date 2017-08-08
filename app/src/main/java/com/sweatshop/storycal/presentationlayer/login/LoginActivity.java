@@ -20,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityLoginBinding loginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        this.getSupportActionBar().hide();
         LocalDbAdapter.init(this);
         User user = new User();
         UserService service = new UserServiceImpl(new UserRepositoryImpl(), new PostRepositoryImpl());

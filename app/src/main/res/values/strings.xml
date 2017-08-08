@@ -81,5 +81,6 @@
     <string name="follow_all">Follow All</string>
 
     <string name="app_id" translatable="false">1996543270568600</string>
+    <string name="title_activity_splash">SplashActivity</string>
 
 </resources>
