@@ -30,6 +30,11 @@ import com.sweatshop.storycal.presentationlayer.homepage.HomepageActivity;
 import com.sweatshop.storycal.presentationlayer.import_photo_camera.ImportPhotoCameraActivity;
 import com.sweatshop.storycal.presentationlayer.main_year.MainYearActivity;
 
+import java.util.Random;
+
+import static android.R.id.list;
+import static com.sweatshop.storycal.R.id.view;
+
 public class ImportPhotoGalleryActivity extends AppCompatActivity {
 
     private int count;
@@ -72,13 +77,9 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
         leftActionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkRandom();
+                imageAdapter.checkRandomFive();
             }
         });
-    }
-
-    public void checkRandom() {
-
     }
 
     public void goToFeed(View view) {
@@ -95,6 +96,7 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
 
     public class ImageAdapter extends BaseAdapter {
         private LayoutInflater mInflater;
+        ViewHolder holder;
 
         public ImageAdapter() {
             mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -113,14 +115,12 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder;
+
             if (convertView == null) {
                 holder = new ViewHolder();
-                convertView = mInflater.inflate(
-                        R.layout.activity_gallery_imageview, null);
+                convertView = mInflater.inflate( R.layout.activity_gallery_imageview, null);
                 holder.imageview = (ImageView) convertView.findViewById(R.id.thumbImage);
                 holder.checkbox = (CheckBox) convertView.findViewById(R.id.itemCheckBox);
-
                 convertView.setTag(holder);
             }
             else {
@@ -159,6 +159,17 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
             holder.id = position;
             return convertView;
         }
+
+        public void checkRandomFive() {
+            int max = count;
+            Random r = new Random();
+            for(int i = 0; i < 5; i++) {
+                int thumbnailIndex = r.nextInt(max - 1);
+                thumbnailsselection[thumbnailIndex] = true;
+                holder.checkbox.setChecked(thumbnailsselection[thumbnailIndex]);
+            }
+        }
+
     }
 
     class ViewHolder {
@@ -200,7 +211,7 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
                 final int len = thumbnailsselection.length;
                 int cnt = 0;
                 String selectImages = "";
-                for (int i =0; i<len; i++)
+                for (int i = 0; i < len; i++)
                 {
                     if (thumbnailsselection[i]){
                         cnt++;
@@ -222,6 +233,7 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -233,8 +245,11 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
             }
         }
     }
+
     public void toCamera(View view){
         Intent intent = new Intent(ImportPhotoGalleryActivity.this, ImportPhotoCameraActivity.class);
         startActivity(intent);
     }
+
+
 }
