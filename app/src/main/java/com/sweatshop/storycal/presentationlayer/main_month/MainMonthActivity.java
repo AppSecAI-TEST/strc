@@ -9,12 +9,15 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
+import com.sweatshop.storycal.applicationlayer.LocalStoreService;
 import com.sweatshop.storycal.applicationlayer.UserServiceImpl;
 import com.sweatshop.storycal.databinding.ActivityMainMonthBinding;
 import com.sweatshop.storycal.domainlayer.Album.AlbumCategory;
+import com.sweatshop.storycal.domainlayer.User.User;
 import com.sweatshop.storycal.infrastructurelayer.localStore.Repositories.PostRepositoryImpl;
 import com.sweatshop.storycal.infrastructurelayer.localStore.Repositories.UserRepositoryImpl;
 import com.sweatshop.storycal.presentationlayer.homepage.HomepageActivity;
@@ -26,7 +29,6 @@ public class MainMonthActivity extends AppCompatActivity {
     private RecyclerView albumCategoryView;
     private GridLayoutManager gridLayoutManager;
     private List<AlbumCategory> albumCategories;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,6 @@ public class MainMonthActivity extends AppCompatActivity {
 
         ActivityMainMonthBinding activityMainMonthBinding = DataBindingUtil.setContentView(this, R.layout.activity_main_month);
         activityMainMonthBinding.setMain(new MainMonthViewModel(this, new UserRepositoryImpl().get(0), new UserServiceImpl(new UserRepositoryImpl(), new PostRepositoryImpl())));
-
         setUpActionBar();
     }
 
