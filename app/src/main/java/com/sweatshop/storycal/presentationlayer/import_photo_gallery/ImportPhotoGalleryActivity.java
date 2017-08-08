@@ -115,7 +115,6 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-
             if (convertView == null) {
                 holder = new ViewHolder();
                 convertView = mInflater.inflate( R.layout.activity_gallery_imageview, null);
@@ -161,13 +160,24 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
         }
 
         public void checkRandomFive() {
-            int max = count;
             Random r = new Random();
+            int[] randomIndexes = new int[5];
             for(int i = 0; i < 5; i++) {
-                int thumbnailIndex = r.nextInt(max - 1);
-                thumbnailsselection[thumbnailIndex] = true;
-                holder.checkbox.setChecked(thumbnailsselection[thumbnailIndex]);
+                int thumbnailIndex = r.nextInt(count - 1);
+                randomIndexes[i] = thumbnailIndex;
             }
+            for(int index = 0; index < count; index++){
+                for(int i = 0; i < 5; i++){
+                    if(index == randomIndexes[i]) {
+                        thumbnailsselection[index] = true;
+                        break;
+                    }
+                    else{
+                        thumbnailsselection[index] = false;
+                    }
+                }
+            }
+            imageAdapter.notifyDataSetChanged();
         }
 
     }
