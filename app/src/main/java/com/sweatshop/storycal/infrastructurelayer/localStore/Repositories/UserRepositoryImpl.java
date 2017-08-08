@@ -2,6 +2,7 @@ package com.sweatshop.storycal.infrastructurelayer.localStore.Repositories;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.sweatshop.storycal.domainlayer.Album.Album;
 import com.sweatshop.storycal.domainlayer.Album.AlbumCategory;
@@ -252,19 +253,19 @@ public class UserRepositoryImpl implements UserRepository {
         );
 
         if(!cursor.moveToFirst()) {
-            return null;
+            return new LinkedList<>();
         }
 
         List<AlbumCategory> albumCategories = new LinkedList<AlbumCategory>();
         AlbumCategory albumCategory = null;
 
-        while (cursor.moveToNext()) {
+        do {
             albumCategory = new AlbumCategory();
             albumCategory.setId(cursor.getLong(0));
             albumCategory.setUser_id(cursor.getLong(1));
             albumCategory.setYear(cursor.getString(2));
             albumCategories.add(albumCategory);
-        }
+        }while ((cursor.moveToNext()));
         
         return albumCategories;
     }
