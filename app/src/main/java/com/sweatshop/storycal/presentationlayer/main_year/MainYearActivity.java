@@ -16,6 +16,7 @@ import com.sweatshop.storycal.R;
 import com.sweatshop.storycal.applicationlayer.LocalStoreService;
 import com.sweatshop.storycal.domainlayer.Album.Album;
 import com.sweatshop.storycal.domainlayer.User.User;
+import com.sweatshop.storycal.infrastructurelayer.localStore.Repositories.UserRepositoryImpl;
 import com.sweatshop.storycal.presentationlayer.LogoutViewModel;
 import com.sweatshop.storycal.presentationlayer.home.MainActivity;
 import com.sweatshop.storycal.presentationlayer.homepage.HomepageActivity;
@@ -77,29 +78,33 @@ public class MainYearActivity extends AppCompatActivity {
         albumView = (RecyclerView) findViewById(R.id.albumList);
         albums = new LinkedList<>();
 
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
+        UserRepositoryImpl repository = new UserRepositoryImpl();
+        albums = repository.getAlbums(getIntent().getExtras().getLong("album_category_id"));
 
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
 
-        albumView.setAdapter(new AlbumRecyclerAdapter(this, albums));
+        if(albums != null) {
+            albumView.setAdapter(new AlbumRecyclerAdapter(this, albums));
 
-        GridLayoutManager manager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
+            GridLayoutManager manager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
 
-        albumView.setLayoutManager(manager);
-        albumView.setVerticalScrollBarEnabled(true);
+            albumView.setLayoutManager(manager);
+            albumView.setVerticalScrollBarEnabled(true);
+        }
 
     }
 

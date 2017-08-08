@@ -12,6 +12,7 @@ import com.sweatshop.storycal.infrastructurelayer.localStore.localDb.databaseAda
 import com.sweatshop.storycal.infrastructurelayer.localStore.localDb.databaseContracts.AlbumCategoryContract;
 import com.sweatshop.storycal.infrastructurelayer.localStore.localDb.databaseContracts.AlbumContract;
 import com.sweatshop.storycal.infrastructurelayer.localStore.localDb.databaseContracts.AlbumPictureContract;
+import com.sweatshop.storycal.infrastructurelayer.localStore.localDb.databaseContracts.LoginUserContract;
 import com.sweatshop.storycal.infrastructurelayer.localStore.localDb.databaseContracts.PhotoContract;
 import com.sweatshop.storycal.infrastructurelayer.localStore.localDb.databaseContracts.UserContract;
 
@@ -248,8 +249,8 @@ public class UserRepositoryImpl implements UserRepository {
                 AlbumCategoryContract.COL_USER_ID + "=?",
                 new String[] {Long.toString(userId)},
                 null,
-                null,
-                null
+               null,
+                AlbumCategoryContract.COL_YEAR + " DESC"
         );
 
         if(!cursor.moveToFirst()) {
@@ -270,18 +271,18 @@ public class UserRepositoryImpl implements UserRepository {
         return albumCategories;
     }
 
-    public List<AlbumCategory> getAlbumCategory(long userId) {
-        String[] columnsQueary =  {
-                AlbumCategoryContract._ID,
-                AlbumCategoryContract.COL_USER_ID,
-                AlbumCategoryContract.COL_YEAR
+    public List<Album> getAlbums(long albumCategoryId) {
+        final String[] columnsQuery = {
+                AlbumContract._ID,
+                AlbumContract.COL_ALBUM_CATEGORY_ID,
+                AlbumContract.COL_MONTH
         };
 
-        Cursor cursor = LocalDbAdapter.getDatabase().query(
-                AlbumCategoryContract.TABLE_NAME,
-                columnsQueary,
-                AlbumCategoryContract.COL_USER_ID + "=?",
-                new String[] {Long.toString(userId)},
+        final Cursor cursor = LocalDbAdapter.getDatabase().query(
+                AlbumContract.TABLE_NAME,
+                columnsQuery,
+                AlbumContract.COL_ALBUM_CATEGORY_ID + "=?",
+                new String[]{Long.toString(albumCategoryId)},
                 null,
                 null,
                 null,
@@ -289,20 +290,21 @@ public class UserRepositoryImpl implements UserRepository {
         );
 
         if(!cursor.moveToFirst()) {
-            return new LinkedList<AlbumCategory>();
+            return null;
         }
 
-        List<AlbumCategory> albumCategories = new LinkedList<AlbumCategory>();
+        List<Album> albums = new LinkedList<>();
+        Album album = null;
 
-        while(cursor.moveToNext()) {
-            albumCategories.add(new AlbumCategory(cursor.getLong(0), cursor.getLong(1), cursor.getString(2)));
-        }
+        do {
+            album = new Album();
+            album.setId(cursor.getLong(0));
+            album.setAlbum_category_id(cursor.getLong(1));
+            album.setMonth(cursor.getString(2));
+            albums.add(album);
+        }while (cursor.moveToNext());
 
-        for(AlbumCategory albumCategory : albumCategories) {
-            albumCategory.setAlbums(findAlbums(albumCategory.getId()));
-        }
-
-        return albumCategories;
+        return albums;
     }
 
     private Album findAlbum(long albumCategoryId, String month) {
