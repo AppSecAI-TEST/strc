@@ -39,6 +39,7 @@ public class FBFriendsActivity extends AppCompatActivity {
         });
 
         TextView rightActionBtn= (TextView)view.findViewById(R.id.action_right_signup);
+        rightActionBtn.setText(R.string.skip_action_bar);
         rightActionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
