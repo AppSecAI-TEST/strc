@@ -8,10 +8,16 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
+import com.sweatshop.storycal.applicationlayer.LocalStoreService;
 import com.sweatshop.storycal.domainlayer.Album.Album;
+import com.sweatshop.storycal.domainlayer.User.User;
+import com.sweatshop.storycal.infrastructurelayer.localStore.Repositories.UserRepositoryImpl;
+import com.sweatshop.storycal.presentationlayer.LogoutViewModel;
 import com.sweatshop.storycal.presentationlayer.home.MainActivity;
 import com.sweatshop.storycal.presentationlayer.homepage.HomepageActivity;
 import com.sweatshop.storycal.presentationlayer.main_month.MainMonthActivity;
@@ -22,13 +28,19 @@ import java.util.List;
 public class MainYearActivity extends AppCompatActivity {
     private RecyclerView albumView;
     private List<Album> albums;
+    private User user;
+    private TextView textView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_year);
         setUpActionBar();
-        Bundle b = getIntent().getExtras();
         setRecyclerView();
+        LocalStoreService localStoreService = new LocalStoreService();
+        this.user = localStoreService.getUserFromLocalStore();
+        textView = (TextView) this.findViewById(R.id.profileName_lbl);
+        textView.setText(this.user.getName());
     }
 
     private void setUpActionBar() {
@@ -52,35 +64,47 @@ public class MainYearActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Settings",Toast.LENGTH_LONG).show();
             }
         });
+
+        ImageView logo = (ImageView)view.findViewById(R.id.logo);
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new LogoutViewModel().logout(v.getContext());
+            }
+        });
     }
 
     private void setRecyclerView() {
         albumView = (RecyclerView) findViewById(R.id.albumList);
         albums = new LinkedList<>();
 
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
-        albums.add(new Album(0,0, "August"));
+        UserRepositoryImpl repository = new UserRepositoryImpl();
+        albums = repository.getAlbums(getIntent().getExtras().getLong("album_category_id"));
 
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
+//        albums.add(new Album(0,0, "August"));
 
-        albumView.setAdapter(new AlbumRecyclerAdapter(this, albums));
+        if(albums != null) {
+            albumView.setAdapter(new AlbumRecyclerAdapter(this, albums));
 
-        GridLayoutManager manager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
+            GridLayoutManager manager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
 
-        albumView.setLayoutManager(manager);
-        albumView.setVerticalScrollBarEnabled(true);
+            albumView.setLayoutManager(manager);
+            albumView.setVerticalScrollBarEnabled(true);
+        }
 
     }
 
@@ -97,6 +121,7 @@ public class MainYearActivity extends AppCompatActivity {
     public void backToYear(View view) {
         Intent intent = new Intent(MainYearActivity.this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void addPhoto() {}

@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
@@ -18,6 +19,7 @@ import com.sweatshop.storycal.domainlayer.Album.AlbumCategory;
 import com.sweatshop.storycal.domainlayer.User.User;
 import com.sweatshop.storycal.infrastructurelayer.localStore.Repositories.PostRepositoryImpl;
 import com.sweatshop.storycal.infrastructurelayer.localStore.Repositories.UserRepositoryImpl;
+import com.sweatshop.storycal.presentationlayer.LogoutViewModel;
 import com.sweatshop.storycal.presentationlayer.gallery.GalleryActivity;
 import com.sweatshop.storycal.presentationlayer.homepage.HomepageActivity;
 import com.sweatshop.storycal.presentationlayer.import_photo_gallery.ImportPhotoGalleryActivity;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView albumCategoryView;
     private GridLayoutManager gridLayoutManager;
     private List<AlbumCategory> albumCategories;
+    private MainViewModel mainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        binding.setMain(new MainViewModel(this, new User(),new UserServiceImpl(new UserRepositoryImpl(), new PostRepositoryImpl())));
+        binding.setMain(mainViewModel = new MainViewModel(this, new User(),new UserServiceImpl(new UserRepositoryImpl(), new PostRepositoryImpl())));
 
         setUpActionBar();
         setRecyclerView();
@@ -66,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ImageView logo = (ImageView)view.findViewById(R.id.logo);
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new LogoutViewModel().logout(v.getContext());
+            }
+        });
+
         view.setBackgroundColor(0x00FFFF00 );
     }
 
@@ -73,14 +84,18 @@ public class MainActivity extends AppCompatActivity {
         albumCategoryView = (RecyclerView) findViewById(R.id.albumCategory);
         albumCategories = new LinkedList<>();
 
-        albumCategories.add(new AlbumCategory(0, 0, "2017"));
-        albumCategories.add(new AlbumCategory(0, 0, "2016"));
-        albumCategories.add(new AlbumCategory(0, 0, "2015"));
-        albumCategories.add(new AlbumCategory(0, 0, "2014"));
-        albumCategories.add(new AlbumCategory(0, 0, "2013"));
-        albumCategories.add(new AlbumCategory(0, 0, "2012"));
-        albumCategories.add(new AlbumCategory(0, 0, "2011"));
-        albumCategories.add(new AlbumCategory(0, 0, "2010"));
+        UserRepositoryImpl repository = new UserRepositoryImpl();
+
+        albumCategories = repository.findAlbumCategory(mainViewModel.GetUser().getId());
+
+//        albumCategories.add(new AlbumCategory(0, 0, "2017"));
+//        albumCategories.add(new AlbumCategory(0, 0, "2016"));
+//        albumCategories.add(new AlbumCategory(0, 0, "2015"));
+//        albumCategories.add(new AlbumCategory(0, 0, "2014"));
+//        albumCategories.add(new AlbumCategory(0, 0, "2013"));
+//        albumCategories.add(new AlbumCategory(0, 0, "2012"));
+//        albumCategories.add(new AlbumCategory(0, 0, "2011"));
+//        albumCategories.add(new AlbumCategory(0, 0, "2010"));
 
         albumCategoryView.setAdapter(new AlbumCategoryRecyclerAdapter(this, albumCategories));
 
@@ -129,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
 //        Intent intent = new Intent(MainActivity.this, FaceDetectionActivity.class);
 //        startActivity(intent);
     }
+
 
     @Override
     public void onBackPressed() {

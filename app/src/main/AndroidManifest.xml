@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentationlayer.login.LoginActivity">
+        <activity android:name=".presentationlayer.SplashActivity">
             <provider
                 android:name="android.support.v4.content.FileProvider"
                 android:authorities="com.example.android.fileprovider"
@@ -35,6 +35,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentationlayer.login.LoginActivity"/>
         <activity android:name=".presentationlayer.register.RegisterActivity" />
         <activity android:name=".presentationlayer.enter_email.EnterEmailActivity" />
         <activity android:name=".presentationlayer.enter_info.EnterInfoActivity" />
@@ -58,7 +59,11 @@
         <activity android:name=".presentationlayer.gallery.GalleryActivity" />
         <activity android:name=".presentationlayer.gallery_full_image.GalleryFullImageActivity" />
         <activity android:name=".presentationlayer.face_detection.FaceDetectionActivity" />
+<<<<<<< HEAD
         <activity android:name=".presentationlayer.profile_picture.popup.PopupActivity"></activity>
+=======
+
+>>>>>>> f4e0ca4264731d1c3f179cdc77d1212e40382a74
     </application>
 
 </manifest>

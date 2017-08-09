@@ -13,6 +13,7 @@ import com.sweatshop.storycal.infrastructurelayer.localStore.localDb.databaseCon
  */
 
 public class LocalStoreService {
+    
     public void addLoginUserToLocalStore(User user) {
         ContentValues values = new ContentValues();
         values.put(LoginUserContract._ID, user.getId());
@@ -25,7 +26,7 @@ public class LocalStoreService {
         LocalDbAdapter.getDatabase().insert(LoginUserContract.LOGIN_USER_TABLE, null, values);
     }
 
-    public User getUserFromLocalStore(long id) {
+    public User getUserFromLocalStore() {
 
         final String[] columns = {
                 UserContract._ID,
@@ -39,8 +40,8 @@ public class LocalStoreService {
         final Cursor cursor = LocalDbAdapter.getDatabase().query(
                 LoginUserContract.LOGIN_USER_TABLE,
                 columns,
-                UserContract._ID + "=?",
-                new String[]{Long.toString(id)},
+                LoginUserContract.COL_USER + "=?",
+                new String[]{Long.toString(1)},
                 null,
                 null,
                 null
@@ -60,6 +61,10 @@ public class LocalStoreService {
         user.setNumOfStories(cursor.getInt(5));
 
         return user;
+    }
+
+    public void RemoveUserFromLocalStore() {
+        LocalDbAdapter.getDatabase().delete(LoginUserContract.LOGIN_USER_TABLE, LoginUserContract.COL_USER + "=?", new String[]{Long.toString(1)});
     }
 
 }

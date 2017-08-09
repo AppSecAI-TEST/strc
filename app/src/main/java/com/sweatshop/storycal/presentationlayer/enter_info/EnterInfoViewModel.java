@@ -1,5 +1,6 @@
 package com.sweatshop.storycal.presentationlayer.enter_info;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.BaseObservable;
@@ -52,6 +53,7 @@ public class EnterInfoViewModel extends BaseObservable {
             intent.putExtra("name", name);
             intent.putExtra("password", password);
             context.startActivity(intent);
+
         }
     }
 }

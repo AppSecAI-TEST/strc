@@ -1,6 +1,7 @@
 package com.sweatshop.storycal.presentationlayer.import_photo_gallery;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -26,9 +27,15 @@ import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
 import com.sweatshop.storycal.presentationlayer.edit.EditPostActivity;
+import com.sweatshop.storycal.presentationlayer.home.MainActivity;
 import com.sweatshop.storycal.presentationlayer.homepage.HomepageActivity;
 import com.sweatshop.storycal.presentationlayer.import_photo_camera.ImportPhotoCameraActivity;
 import com.sweatshop.storycal.presentationlayer.main_year.MainYearActivity;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import static android.os.Build.VERSION_CODES.M;
 
 public class ImportPhotoGalleryActivity extends AppCompatActivity {
 
@@ -66,35 +73,22 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.action_bar_import_photos);
-        View view =getSupportActionBar().getCustomView();
+        View view = getSupportActionBar().getCustomView();
 
         TextView leftActionBtn= (TextView)view.findViewById(R.id.action_random);
         leftActionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkRandom();
+                imageAdapter.selectRandomFive();
             }
         });
-    }
-
-    public void checkRandom() {
-
-    }
-
-    public void goToFeed(View view) {
-        Intent intent = new Intent(ImportPhotoGalleryActivity.this, HomepageActivity.class);
-        startActivity(intent);
-    }
-
-    public void backToMonth(View view) {
-        Intent intent = new Intent(ImportPhotoGalleryActivity.this, MainYearActivity.class);
-        startActivity(intent);
     }
 
     public void addPhoto() {}
 
     public class ImageAdapter extends BaseAdapter {
         private LayoutInflater mInflater;
+        ViewHolder holder;
 
         public ImageAdapter() {
             mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -113,14 +107,11 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder;
             if (convertView == null) {
                 holder = new ViewHolder();
-                convertView = mInflater.inflate(
-                        R.layout.activity_gallery_imageview, null);
+                convertView = mInflater.inflate( R.layout.activity_gallery_imageview, null);
                 holder.imageview = (ImageView) convertView.findViewById(R.id.thumbImage);
                 holder.checkbox = (CheckBox) convertView.findViewById(R.id.itemCheckBox);
-
                 convertView.setTag(holder);
             }
             else {
@@ -158,6 +149,27 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
             holder.checkbox.setChecked(thumbnailsselection[position]);
             holder.id = position;
             return convertView;
+        }
+
+        public void selectRandomFive() {
+            Random r = new Random();
+            int[] randomIndexes = new int[5];
+            for(int i = 0; i < 5; i++) {
+                int thumbnailIndex = r.nextInt(count - 1);
+                randomIndexes[i] = thumbnailIndex;
+            }
+            for(int index = 0; index < count; index++){
+                for(int i = 0; i < 5; i++){
+                    if(index == randomIndexes[i]) {
+                        thumbnailsselection[index] = true;
+                        break;
+                    }
+                    else{
+                        thumbnailsselection[index] = false;
+                    }
+                }
+            }
+            imageAdapter.notifyDataSetChanged();
         }
     }
 
@@ -197,31 +209,32 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                final int len = thumbnailsselection.length;
-                int cnt = 0;
-                String selectImages = "";
-                for (int i =0; i<len; i++)
-                {
-                    if (thumbnailsselection[i]){
-                        cnt++;
-                        selectImages = selectImages + arrPath[i] + "|";
-                    }
-                }
-                if (cnt == 0){
-                    Toast.makeText(getApplicationContext(),
-                            "Please select at least one image",
-                            Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "You've selected Total " + cnt + " image(s).",
-                            Toast.LENGTH_LONG).show();
-                    Log.d("SelectedImages", selectImages);
-                }
-                Intent intent = new Intent(ImportPhotoGalleryActivity.this, EditPostActivity.class);
-                startActivity(intent);
+//                final int len = thumbnailsselection.length;
+//                int cnt = 0;
+//                String selectImages = "";
+//                for (int i = 0; i < len; i++) {
+//                    if (thumbnailsselection[i]){
+//                        cnt++;
+//                        selectImages = selectImages + arrPath[i] + "|";
+//                    }
+//                }
+//                if (cnt == 0){
+//                    Toast.makeText(getApplicationContext(),
+//                            "Please select at least one image",
+//                            Toast.LENGTH_LONG).show();
+//                } else {
+//                    Toast.makeText(getApplicationContext(),
+//                            "You've selected Total " + cnt + " image(s).",
+//                            Toast.LENGTH_LONG).show();
+//                    Log.d("SelectedImages", selectImages);
+//                }
+//                Intent intent = new Intent(ImportPhotoGalleryActivity.this, EditPostActivity.class);
+//                startActivity(intent);
+                importSelectedPictures();
             }
         });
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -233,8 +246,21 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
             }
         }
     }
+
     public void toCamera(View view){
         Intent intent = new Intent(ImportPhotoGalleryActivity.this, ImportPhotoCameraActivity.class);
+        startActivity(intent);
+    }
+
+    public void importSelectedPictures() {
+        ArrayList<Bitmap> selectedPictures = new ArrayList<Bitmap>();
+        for(int i = 0; i < count; i++) {
+            if(thumbnailsselection[i]) {
+                selectedPictures.add(thumbnails[i]);
+            }
+        }
+        Intent intent = new Intent(ImportPhotoGalleryActivity.this, EditPostActivity.class);
+        intent.putExtra("selectedPictures", selectedPictures);
         startActivity(intent);
     }
 }

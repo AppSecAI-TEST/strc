@@ -69,7 +69,8 @@ public class AlbumRecyclerAdapter extends RecyclerView.Adapter<AlbumRecyclerAdap
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(context, MainMonthActivity.class);
-            intent.putExtra("album_id", 1);
+            intent.putExtra("album_id", album.getId());
+            intent.putExtra("album_category_id", album.getAlbum_category_id());
             context.startActivity(intent);
         }
     }

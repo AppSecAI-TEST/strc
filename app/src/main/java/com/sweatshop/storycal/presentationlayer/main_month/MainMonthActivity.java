@@ -9,14 +9,19 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
+import com.sweatshop.storycal.applicationlayer.LocalStoreService;
 import com.sweatshop.storycal.applicationlayer.UserServiceImpl;
 import com.sweatshop.storycal.databinding.ActivityMainMonthBinding;
 import com.sweatshop.storycal.domainlayer.Album.AlbumCategory;
+import com.sweatshop.storycal.domainlayer.User.User;
 import com.sweatshop.storycal.infrastructurelayer.localStore.Repositories.PostRepositoryImpl;
 import com.sweatshop.storycal.infrastructurelayer.localStore.Repositories.UserRepositoryImpl;
+import com.sweatshop.storycal.presentationlayer.LogoutViewModel;
 import com.sweatshop.storycal.presentationlayer.homepage.HomepageActivity;
 import com.sweatshop.storycal.presentationlayer.main_year.MainYearActivity;
 
@@ -26,7 +31,6 @@ public class MainMonthActivity extends AppCompatActivity {
     private RecyclerView albumCategoryView;
     private GridLayoutManager gridLayoutManager;
     private List<AlbumCategory> albumCategories;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +38,6 @@ public class MainMonthActivity extends AppCompatActivity {
 
         ActivityMainMonthBinding activityMainMonthBinding = DataBindingUtil.setContentView(this, R.layout.activity_main_month);
         activityMainMonthBinding.setMain(new MainMonthViewModel(this, new UserRepositoryImpl().get(0), new UserServiceImpl(new UserRepositoryImpl(), new PostRepositoryImpl())));
-
         setUpActionBar();
     }
 
@@ -59,6 +62,14 @@ public class MainMonthActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Settings",Toast.LENGTH_LONG).show();
             }
         });
+
+        ImageView logo = (ImageView)view.findViewById(R.id.logo);
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new LogoutViewModel().logout(v.getContext());
+            }
+        });
     }
 
     public void goToFeed(View view) {
@@ -68,7 +79,10 @@ public class MainMonthActivity extends AppCompatActivity {
 
     public void backToMonth(View view) {
         Intent intent = new Intent(MainMonthActivity.this, MainYearActivity.class);
+        intent.putExtra("album_id", getIntent().getExtras().getLong("album_id"));
+        intent.putExtra("album_category_id", getIntent().getExtras().getLong("album_category_id"));
         startActivity(intent);
+        finish();
     }
 
     public void addPhoto() {}

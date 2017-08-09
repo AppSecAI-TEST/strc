@@ -52,6 +52,7 @@ public class AlbumCategoryRecyclerAdapter extends RecyclerView.Adapter<AlbumCate
         private TextView year;
         private ImageView imageView;
         private RelativeLayout relativeLayout;
+        private long id;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -65,14 +66,14 @@ public class AlbumCategoryRecyclerAdapter extends RecyclerView.Adapter<AlbumCate
         public void setData(AlbumCategory albumCategory) {
             year.setText(albumCategory.getYear());
             imageView.setImageResource(R.drawable.pic16);
+            id = albumCategory.getId();
         }
 
         @Override
         public void onClick(View v) {
             final Intent intent = new Intent(context, MainYearActivity.class);
-            intent.putExtra("album_category_id", 1);
+            intent.putExtra("album_category_id", id);
             context.startActivity(intent);
-            Toast.makeText(context, "hello wolrd", Toast.LENGTH_LONG).show();
         }
     }
 

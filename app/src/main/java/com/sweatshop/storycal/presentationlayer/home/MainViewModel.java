@@ -23,11 +23,11 @@ public class MainViewModel extends BaseObservable {
         this.user = user;
         this.userService = userService;;
         LocalStoreService localStoreService = new LocalStoreService();
-        Bundle bundle = mainActivity.getIntent().getExtras();
-        if(bundle != null) {
-            this.user = localStoreService.getUserFromLocalStore(Long.parseLong(bundle.getString("login_user_id")));
-        }
+        this.userService = userService;;
+        this.user = localStoreService.getUserFromLocalStore();
     }
+
+    public User GetUser() { return user; }
 
     @Bindable
     public String getName() {

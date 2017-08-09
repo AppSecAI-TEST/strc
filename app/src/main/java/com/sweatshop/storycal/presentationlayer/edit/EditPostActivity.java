@@ -1,10 +1,12 @@
 package com.sweatshop.storycal.presentationlayer.edit;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sweatshop.storycal.R;
@@ -13,6 +15,7 @@ import com.sweatshop.storycal.presentationlayer.edit.date_picker.main_date_picke
 import com.sweatshop.storycal.presentationlayer.home.MainActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -30,6 +33,8 @@ public class EditPostActivity extends AppCompatActivity {
     SimpleDateFormat simpleTimeFormat;
     SimpleDateFormat simpleDateOnlyFormat;
     SingleDateAndTimePickerDialog.Builder singleBuilder;
+    ArrayList<Bitmap> selectedPictures;
+    ImageView editedPic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +48,16 @@ public class EditPostActivity extends AppCompatActivity {
         this.simpleTimeFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
 
         this.simpleDateOnlyFormat = new SimpleDateFormat("EEE d MMM", Locale.getDefault());
+
+        selectedPictures = (ArrayList<Bitmap>) getIntent().getSerializableExtra("selectedPictures");
+        setPicture();
     }
 
+    private void setPicture() {
+        editedPic = (ImageView) findViewById(R.id.edit_post_pick);
+        Bitmap bitmap = selectedPictures.get(0);
+        editedPic.setImageBitmap(bitmap);
+    }
 
     private void setUpActionBar() {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
