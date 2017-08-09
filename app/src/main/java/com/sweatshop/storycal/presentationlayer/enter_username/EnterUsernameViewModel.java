@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.sweatshop.storycal.BR;
+import com.sweatshop.storycal.applicationlayer.LocalStoreService;
 import com.sweatshop.storycal.applicationlayer.UserService;
 import com.sweatshop.storycal.domainlayer.User.User;
 import com.sweatshop.storycal.presentationlayer.fb_friends.FBFriendsActivity;
@@ -46,12 +47,15 @@ public class EnterUsernameViewModel extends BaseObservable {
         if(!username.equals("")) {
             if (userService.getUserByUsername(username) == null) {
                 Bundle bundle = intent.getExtras();
-                userService.register(new User(
+                User user;
+                userService.register(user = new User(
                         bundle.getString("name"),
                         username,
                         bundle.getString("password"),
                         bundle.getString("email")
                 ));
+                LocalStoreService localStoreService = new LocalStoreService();
+                localStoreService.addLoginUserToLocalStore(user);
                 context.startActivity(new Intent(context, FBFriendsActivity.class));
             } else {
                 Toast.makeText(context, "Username already exists", Toast.LENGTH_LONG).show();
