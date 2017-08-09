@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
 import com.sweatshop.storycal.applicationlayer.LocalStoreService;
