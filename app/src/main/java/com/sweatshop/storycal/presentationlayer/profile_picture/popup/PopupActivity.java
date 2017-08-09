@@ -29,13 +29,15 @@ public class PopupActivity extends AppCompatActivity {
     private String mCurrentPhotoPath;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
+    private int size;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popup);
         setUpActionBar();
-        camera = (ImageView)findViewById(R.id.imageCamera);
 
+        camera = (ImageView)findViewById(R.id.imageCamera);
         dispatchTakePictureIntent();
 
     }
@@ -88,7 +90,6 @@ public class PopupActivity extends AppCompatActivity {
 
         }
     }
-
 
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
