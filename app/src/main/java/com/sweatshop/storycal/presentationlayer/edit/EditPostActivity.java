@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
 import com.sweatshop.storycal.applicationlayer.LocalStoreService;
@@ -95,7 +96,6 @@ public class EditPostActivity extends AppCompatActivity {
         UserRepositoryImpl userRepository = new UserRepositoryImpl();
         userRepository.addPhotoToAlbum(user.getId(), month, "2017", paths.get(0));
         month = "";
-        Toast.makeText(this, month, Toast.LENGTH_LONG).show();
         startActivity(intent);
     }
 
