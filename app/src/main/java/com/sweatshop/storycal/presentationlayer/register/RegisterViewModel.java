@@ -22,7 +22,7 @@ public class RegisterViewModel extends BaseObservable {
 
     public void register() {
         context.startActivity(new Intent(context, EnterEmailActivity.class));
-        ((Activity) contextc).finish();
+        ((Activity) context).finish();
     }
 
     public void logInWithFacebook() {
