@@ -57,4 +57,9 @@ public class FBFriendsActivity extends AppCompatActivity {
     public void cancel() { }
 
 
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
+
 }

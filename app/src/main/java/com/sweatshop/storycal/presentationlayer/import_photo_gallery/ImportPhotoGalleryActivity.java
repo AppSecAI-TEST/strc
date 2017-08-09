@@ -1,7 +1,6 @@
 package com.sweatshop.storycal.presentationlayer.import_photo_gallery;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,7 +13,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,15 +25,10 @@ import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
 import com.sweatshop.storycal.presentationlayer.edit.EditPostActivity;
-import com.sweatshop.storycal.presentationlayer.home.MainActivity;
-import com.sweatshop.storycal.presentationlayer.homepage.HomepageActivity;
 import com.sweatshop.storycal.presentationlayer.import_photo_camera.ImportPhotoCameraActivity;
-import com.sweatshop.storycal.presentationlayer.main_year.MainYearActivity;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import static android.os.Build.VERSION_CODES.M;
 
 public class ImportPhotoGalleryActivity extends AppCompatActivity {
 
@@ -257,4 +250,9 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
 }
