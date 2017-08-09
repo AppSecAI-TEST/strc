@@ -11,6 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
+import com.sweatshop.storycal.applicationlayer.LocalStoreService;
+import com.sweatshop.storycal.domainlayer.User.User;
+import com.sweatshop.storycal.infrastructurelayer.localStore.Repositories.UserRepositoryImpl;
 import com.sweatshop.storycal.presentationlayer.edit.date_picker.main_date_picker.SingleDateAndTimePicker;
 import com.sweatshop.storycal.presentationlayer.edit.date_picker.main_date_picker.dialog.SingleDateAndTimePickerDialog;
 import com.sweatshop.storycal.presentationlayer.home.MainActivity;
@@ -37,6 +40,7 @@ public class EditPostActivity extends AppCompatActivity {
     SingleDateAndTimePickerDialog.Builder singleBuilder;
     ArrayList<Bitmap> selectedPictures;
     ImageView editedPic;
+    String month;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +55,6 @@ public class EditPostActivity extends AppCompatActivity {
 
         selectedPictures = (ArrayList<Bitmap>) getIntent().getSerializableExtra("selectedPictures");
         paths = (ArrayList<String>) getIntent().getSerializableExtra("paths");
-        Toast.makeText(this, paths.get(2), Toast.LENGTH_SHORT).show();
         setPicture();
     }
 
@@ -88,6 +91,12 @@ public class EditPostActivity extends AppCompatActivity {
     public void publishAlbum() {
         Intent intent = new Intent(EditPostActivity.this, MainActivity.class);
         intent.putExtra("album", selectedPictures);
+        LocalStoreService localStoreService = new LocalStoreService();
+        User user = localStoreService.getUserFromLocalStore();
+        UserRepositoryImpl userRepository = new UserRepositoryImpl();
+        userRepository.addPhotoToAlbum(user.getId(), month, "2017", paths.get(0));
+        month = "";
+        Toast.makeText(this, month, Toast.LENGTH_LONG).show();
         startActivity(intent);
     }
 
@@ -104,15 +113,15 @@ public class EditPostActivity extends AppCompatActivity {
     public void simpleClicked() {
 
         final Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        calendar.set(Calendar.MONTH, 0);
+//        calendar.set(Calendar.DAY_OF_MONTH, 8);
+//        calendar.set(Calendar.MONTH, 0);
         calendar.set(Calendar.YEAR, 2017);
         final Date minDate = calendar.getTime();
 
-        calendar.set(Calendar.DAY_OF_MONTH, 5);
+//        calendar.set(Calendar.DAY_OF_MONTH, 5);
         final Date maxDate = calendar.getTime();
 
-        calendar.set(Calendar.DAY_OF_MONTH, 2);
+//        calendar.set(Calendar.DAY_OF_MONTH, 2);
         final Date defaultDate = calendar.getTime();
 
         singleBuilder = new SingleDateAndTimePickerDialog.Builder(this)
@@ -120,9 +129,9 @@ public class EditPostActivity extends AppCompatActivity {
                 .curved()
 //              .displayHours(false)
 //              .displayMinutes(false)
-                .defaultDate(defaultDate)
-                .minDateRange(minDate)
-                .maxDateRange(maxDate)
+//                .defaultDate(defaultDate)
+//                .minDateRange(minDate)
+//                .maxDateRange(maxDate)
 
                 .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
                     @Override
@@ -134,9 +143,24 @@ public class EditPostActivity extends AppCompatActivity {
                 .listener(new SingleDateAndTimePickerDialog.Listener() {
                     @Override
                     public void onDateSelected(Date date) {
+                        switch (date.getMonth()) {
+                            case 0: month = "January"; break;
+                            case 1: month = "February"; break;
+                            case 2: month = "March"; break;
+                            case 3: month = "April"; break;
+                            case 4: month = "May"; break;
+                            case 5: month = "June";break;
+                            case 6: month = "July"; break;
+                            case 7: month = "August"; break;
+                            case 8: month = "September"; break;
+                            case 9: month = "October"; break;
+                            case 10: month = "November"; break;
+                            case 11: month = "December"; break;
+                        }
                         singleText.setText(simpleDateFormat.format(date));
                     }
                 });
+        Toast.makeText(this, month, Toast.LENGTH_LONG).show();
         singleBuilder.display();
     }
 
