@@ -85,9 +85,10 @@ public class MainActivity extends AppCompatActivity {
         albumCategories = new LinkedList<>();
 
         UserRepositoryImpl repository = new UserRepositoryImpl();
-
-        albumCategories = repository.findAlbumCategory(mainViewModel.GetUser().getId());
-
+        
+        if(mainViewModel.GetUser() != null) {
+            albumCategories = repository.findAlbumCategory(mainViewModel.GetUser().getId());
+        }
 //        albumCategories.add(new AlbumCategory(0, 0, "2017"));
 //        albumCategories.add(new AlbumCategory(0, 0, "2016"));
 //        albumCategories.add(new AlbumCategory(0, 0, "2015"));

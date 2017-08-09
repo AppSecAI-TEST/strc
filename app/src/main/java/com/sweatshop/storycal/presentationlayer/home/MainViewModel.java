@@ -25,6 +25,9 @@ public class MainViewModel extends BaseObservable {
         LocalStoreService localStoreService = new LocalStoreService();
         this.userService = userService;;
         this.user = localStoreService.getUserFromLocalStore();
+        if(this.user == null) {
+            this.user = user;
+        }
     }
 
     public User GetUser() { return user; }
