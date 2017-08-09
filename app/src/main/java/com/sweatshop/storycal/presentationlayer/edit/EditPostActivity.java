@@ -75,14 +75,15 @@ public class EditPostActivity extends AppCompatActivity {
         rightActionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToContactFriends();
+                publishAlbum();
             }
         });
     }
 
 
-    public void goToContactFriends() {
+    public void publishAlbum() {
         Intent intent = new Intent(EditPostActivity.this, MainActivity.class);
+        intent.putExtra("album", selectedPictures);
         startActivity(intent);
     }
 
