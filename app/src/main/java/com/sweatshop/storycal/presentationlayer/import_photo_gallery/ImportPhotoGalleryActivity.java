@@ -219,8 +219,8 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
                 }
                 if (!picSelected){
                     Toast.makeText(getApplicationContext(),
-                            "Please select at least one image",
-                            Toast.LENGTH_LONG).show();
+                    "Please select at least one image",
+                    Toast.LENGTH_LONG).show();
                 } else {
                     importSelectedPictures();
                 }

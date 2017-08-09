@@ -44,9 +44,7 @@ public class EditPostActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         this.simpleDateFormat = new SimpleDateFormat("EEE d MMM HH:mm", Locale.getDefault());
-
         this.simpleTimeFormat = new SimpleDateFormat("hh:mm aa", Locale.getDefault());
-
         this.simpleDateOnlyFormat = new SimpleDateFormat("EEE d MMM", Locale.getDefault());
 
         selectedPictures = (ArrayList<Bitmap>) getIntent().getSerializableExtra("selectedPictures");
@@ -77,20 +75,19 @@ public class EditPostActivity extends AppCompatActivity {
         rightActionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToContactFriends();
+                publishAlbum();
             }
         });
     }
 
 
-    public void goToContactFriends() {
+    public void publishAlbum() {
         Intent intent = new Intent(EditPostActivity.this, MainActivity.class);
+        intent.putExtra("album", selectedPictures);
         startActivity(intent);
     }
 
     public void cancel() { }
-
-
 
     @Override
     protected void onPause() {
@@ -117,9 +114,8 @@ public class EditPostActivity extends AppCompatActivity {
         singleBuilder = new SingleDateAndTimePickerDialog.Builder(this)
                 .bottomSheet()
                 .curved()
-
-//                .displayHours(false)
-//                .displayMinutes(false)
+//              .displayHours(false)
+//              .displayMinutes(false)
                 .defaultDate(defaultDate)
                 .minDateRange(minDate)
                 .maxDateRange(maxDate)
@@ -130,7 +126,6 @@ public class EditPostActivity extends AppCompatActivity {
 
                     }
                 })
-
                 .title("Simple")
                 .listener(new SingleDateAndTimePickerDialog.Listener() {
                     @Override
