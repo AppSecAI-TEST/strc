@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
-import com.sweatshop.storycal.presentationlayer.homepage.HomepageActivity;
+import com.sweatshop.storycal.presentationlayer.home.MainActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -64,7 +64,7 @@ public class PopupActivity extends AppCompatActivity {
 
     public void goToMain(View view) {
         Toast.makeText(this, "HomePage", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(PopupActivity.this, HomepageActivity.class);
+        Intent intent = new Intent(PopupActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
