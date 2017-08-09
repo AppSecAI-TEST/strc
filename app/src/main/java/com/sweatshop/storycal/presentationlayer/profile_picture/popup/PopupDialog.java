@@ -1,6 +1,7 @@
 package com.sweatshop.storycal.presentationlayer.profile_picture.popup;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.sweatshop.storycal.R;
 import com.sweatshop.storycal.presentationlayer.edit.date_picker.main_date_picker.dialog.BottomSheetHelper;
+import com.sweatshop.storycal.presentationlayer.import_photo_camera.ImportPhotoCameraActivity;
 
 /**
  * Created by arTeam on 03/08/2017.
@@ -50,7 +52,6 @@ public class PopupDialog extends BaseDialog {
         });
     }
 
-
     private void init(View view) {
 
         final TextView popupHeader = (TextView) view.findViewById(R.id.popup_header);
@@ -71,9 +72,11 @@ public class PopupDialog extends BaseDialog {
                 @Override
                 public void onClick(View view) {
                     okClicked = true;
+                    context.startActivity(new Intent(context, ImportPhotoCameraActivity.class));
                 }
             });
         }
+
         final TextView libPhotoBtn = (TextView) view.findViewById(R.id.lib_photo_btn);
         if (libPhotoBtn != null) {
             libPhotoBtn.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +87,7 @@ public class PopupDialog extends BaseDialog {
                 }
             });
         }
+
         final TextView webImportBtn = (TextView) view.findViewById(R.id.web_import_btn);
         if (webImportBtn != null) {
             webImportBtn.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +97,7 @@ public class PopupDialog extends BaseDialog {
                 }
             });
         }
+
         final TextView cancelBtn = (TextView) view.findViewById(R.id.cancel_btn);
         if (cancelBtn != null) {
             cancelBtn.setOnClickListener(new View.OnClickListener() {

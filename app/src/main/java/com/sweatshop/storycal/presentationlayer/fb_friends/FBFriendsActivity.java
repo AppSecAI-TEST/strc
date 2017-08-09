@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.sweatshop.storycal.R;
 import com.sweatshop.storycal.databinding.ActivityFbFriendsBinding;
-import com.sweatshop.storycal.presentationlayer.fb_popup.FBPopupActivity;
+import com.sweatshop.storycal.presentationlayer.profile_picture.ProfilePictureActivity;
 
 public class FBFriendsActivity extends AppCompatActivity {
 
@@ -39,6 +39,7 @@ public class FBFriendsActivity extends AppCompatActivity {
         });
 
         TextView rightActionBtn= (TextView)view.findViewById(R.id.action_right_signup);
+        rightActionBtn.setText(R.string.skip_action_bar);
         rightActionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +50,7 @@ public class FBFriendsActivity extends AppCompatActivity {
 
 
     public void goToContactFriends() {
-        Intent intent = new Intent(FBFriendsActivity.this, FBPopupActivity.class);
+        Intent intent = new Intent(FBFriendsActivity.this, ProfilePictureActivity.class);
         startActivity(intent);
     }
 
