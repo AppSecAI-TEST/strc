@@ -1,5 +1,6 @@
 package com.sweatshop.storycal.presentationlayer.register;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.BaseObservable;
@@ -19,9 +20,18 @@ public class RegisterViewModel extends BaseObservable {
         this.context = context;
     }
 
-    public void register() { context.startActivity(new Intent(context, EnterEmailActivity.class)); }
+    public void register() {
+        context.startActivity(new Intent(context, EnterEmailActivity.class));
+        ((Activity) contextc).finish();
+    }
 
-    public void logInWithFacebook() { context.startActivity(new Intent(context, FBPopupActivity.class)); }
+    public void logInWithFacebook() {
+        context.startActivity(new Intent(context, FBPopupActivity.class));
+        ((Activity) context).finish();
+    }
 
-    public void signIn() { context.startActivity(new Intent(context, LoginActivity.class)); }
+    public void signIn() {
+        context.startActivity(new Intent(context, LoginActivity.class));
+        ((Activity) context).finish();
+    }
 }
