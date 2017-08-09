@@ -59,6 +59,7 @@ public class EnterUsernameActivity extends AppCompatActivity {
 
     public void back(){
         Intent intent = new Intent(EnterUsernameActivity.this, EnterInfoActivity.class);
+        intent.putExtra("email", getIntent().getExtras().getString("email"));
         startActivity(intent);
         finish();
     }
