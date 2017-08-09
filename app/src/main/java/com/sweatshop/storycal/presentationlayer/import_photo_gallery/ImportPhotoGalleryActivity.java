@@ -1,7 +1,6 @@
 package com.sweatshop.storycal.presentationlayer.import_photo_gallery;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,7 +13,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,15 +25,10 @@ import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
 import com.sweatshop.storycal.presentationlayer.edit.EditPostActivity;
-import com.sweatshop.storycal.presentationlayer.home.MainActivity;
-import com.sweatshop.storycal.presentationlayer.homepage.HomepageActivity;
 import com.sweatshop.storycal.presentationlayer.import_photo_camera.ImportPhotoCameraActivity;
-import com.sweatshop.storycal.presentationlayer.main_year.MainYearActivity;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import static android.os.Build.VERSION_CODES.M;
 
 public class ImportPhotoGalleryActivity extends AppCompatActivity {
 
@@ -198,7 +191,9 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
                     getApplicationContext().getContentResolver(), id,
                     MediaStore.Images.Thumbnails.MICRO_KIND, null);
             arrPath[i]= imagecursor.getString(dataColumnIndex);
+
         }
+        Toast.makeText(this, "" + arrPath[0], Toast.LENGTH_SHORT).show();
         GridView imagegrid = (GridView) findViewById(R.id.import_photo_gridView);
         imageAdapter = new ImageAdapter();
         imagegrid.setAdapter(imageAdapter);
@@ -247,13 +242,16 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
 
     public void importSelectedPictures() {
         ArrayList<Bitmap> selectedPictures = new ArrayList<Bitmap>();
+        ArrayList<String> paths = new ArrayList<>();
         for(int i = 0; i < count; i++) {
             if(thumbnailsselection[i]) {
                 selectedPictures.add(thumbnails[i]);
+                paths.add(arrPath[i]);
             }
         }
         Intent intent = new Intent(ImportPhotoGalleryActivity.this, EditPostActivity.class);
         intent.putExtra("selectedPictures", selectedPictures);
+        intent.putExtra("paths", paths);
         startActivity(intent);
     }
 

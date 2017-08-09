@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.sweatshop.storycal.R;
 import com.sweatshop.storycal.presentationlayer.home.MainActivity;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -27,7 +26,6 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
 public class PopupActivity extends AppCompatActivity {
 
     private ImageView camera;
-    private byte[] profilePicByteArray;
     private String mCurrentPhotoPath;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -37,7 +35,9 @@ public class PopupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_popup);
         setUpActionBar();
         camera = (ImageView)findViewById(R.id.imageCamera);
+
         dispatchTakePictureIntent();
+
     }
 
     private void setUpActionBar() {
@@ -67,7 +67,7 @@ public class PopupActivity extends AppCompatActivity {
     public void goToMain(View view) {
         Toast.makeText(this, "HomePage", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(PopupActivity.this, MainActivity.class);
-        intent.putExtra("profilePic", profilePicByteArray);
+        intent.putExtra("profilePic", mCurrentPhotoPath);
         startActivity(intent);
     }
 
@@ -80,16 +80,15 @@ public class PopupActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             camera.setImageBitmap(imageBitmap);
 
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-            profilePicByteArray = stream.toByteArray();
         }
     }
+
 
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
