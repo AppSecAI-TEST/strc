@@ -209,28 +209,21 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-//                final int len = thumbnailsselection.length;
-//                int cnt = 0;
-//                String selectImages = "";
-//                for (int i = 0; i < len; i++) {
-//                    if (thumbnailsselection[i]){
-//                        cnt++;
-//                        selectImages = selectImages + arrPath[i] + "|";
-//                    }
-//                }
-//                if (cnt == 0){
-//                    Toast.makeText(getApplicationContext(),
-//                            "Please select at least one image",
-//                            Toast.LENGTH_LONG).show();
-//                } else {
-//                    Toast.makeText(getApplicationContext(),
-//                            "You've selected Total " + cnt + " image(s).",
-//                            Toast.LENGTH_LONG).show();
-//                    Log.d("SelectedImages", selectImages);
-//                }
-//                Intent intent = new Intent(ImportPhotoGalleryActivity.this, EditPostActivity.class);
-//                startActivity(intent);
-                importSelectedPictures();
+                final int len = thumbnailsselection.length;
+                boolean picSelected = false;
+                for (int i = 0; i < len; i++) {
+                    if (thumbnailsselection[i]){
+                        picSelected = true;
+                        break;
+                    }
+                }
+                if (!picSelected){
+                    Toast.makeText(getApplicationContext(),
+                            "Please select at least one image",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    importSelectedPictures();
+                }
             }
         });
     }
