@@ -43,6 +43,18 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setMain(mainViewModel = new MainViewModel(this, new User(),new UserServiceImpl(new UserRepositoryImpl(), new PostRepositoryImpl())));
 
+        ImageView profPicImage = (ImageView)findViewById(R.id.profileImage_Img);
+
+
+
+//
+//        Bundle bundle = getIntent().getExtras();
+//
+//        byte[] profPic = bundle.getByteArray("profilePic");
+//        Bitmap bmp = BitmapFactory.decodeByteArray(profPic, 0, profPic.length);
+//        ImageView profPicImage = (ImageView)findViewById(R.id.profileImage_Img);
+//        profPicImage.setImageBitmap(Bitmap.createScaledBitmap(bmp, profPicImage.getWidth(), profPicImage.getHeight(), false));
+
         setUpActionBar();
         setRecyclerView();
     }

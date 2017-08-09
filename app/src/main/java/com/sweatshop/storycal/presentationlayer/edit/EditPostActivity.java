@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
 import com.sweatshop.storycal.presentationlayer.edit.date_picker.main_date_picker.SingleDateAndTimePicker;
@@ -32,6 +33,7 @@ public class EditPostActivity extends AppCompatActivity {
     SimpleDateFormat simpleDateFormat;
     SimpleDateFormat simpleTimeFormat;
     SimpleDateFormat simpleDateOnlyFormat;
+    ArrayList<String> paths;
     SingleDateAndTimePickerDialog.Builder singleBuilder;
     ArrayList<Bitmap> selectedPictures;
     ImageView editedPic;
@@ -48,6 +50,8 @@ public class EditPostActivity extends AppCompatActivity {
         this.simpleDateOnlyFormat = new SimpleDateFormat("EEE d MMM", Locale.getDefault());
 
         selectedPictures = (ArrayList<Bitmap>) getIntent().getSerializableExtra("selectedPictures");
+        paths = (ArrayList<String>) getIntent().getSerializableExtra("paths");
+        Toast.makeText(this, paths.get(2), Toast.LENGTH_SHORT).show();
         setPicture();
     }
 

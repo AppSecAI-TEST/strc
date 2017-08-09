@@ -191,7 +191,9 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
                     getApplicationContext().getContentResolver(), id,
                     MediaStore.Images.Thumbnails.MICRO_KIND, null);
             arrPath[i]= imagecursor.getString(dataColumnIndex);
+
         }
+        Toast.makeText(this, "" + arrPath[0], Toast.LENGTH_SHORT).show();
         GridView imagegrid = (GridView) findViewById(R.id.import_photo_gridView);
         imageAdapter = new ImageAdapter();
         imagegrid.setAdapter(imageAdapter);
@@ -240,13 +242,16 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
 
     public void importSelectedPictures() {
         ArrayList<Bitmap> selectedPictures = new ArrayList<Bitmap>();
+        ArrayList<String> paths = new ArrayList<>();
         for(int i = 0; i < count; i++) {
             if(thumbnailsselection[i]) {
                 selectedPictures.add(thumbnails[i]);
+                paths.add(arrPath[i]);
             }
         }
         Intent intent = new Intent(ImportPhotoGalleryActivity.this, EditPostActivity.class);
         intent.putExtra("selectedPictures", selectedPictures);
+        intent.putExtra("paths", paths);
         startActivity(intent);
     }
 

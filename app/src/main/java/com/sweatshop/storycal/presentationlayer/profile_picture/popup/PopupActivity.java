@@ -2,6 +2,7 @@ package com.sweatshop.storycal.presentationlayer.profile_picture.popup;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -24,10 +25,9 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class PopupActivity extends AppCompatActivity {
 
-    ImageView camera;
-    Bitmap bitmap;
-    String mCurrentPhotoPath;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    private ImageView camera;
+    private String mCurrentPhotoPath;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,9 @@ public class PopupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_popup);
         setUpActionBar();
         camera = (ImageView)findViewById(R.id.imageCamera);
+
         dispatchTakePictureIntent();
+
     }
 
     private void setUpActionBar() {
@@ -65,6 +67,7 @@ public class PopupActivity extends AppCompatActivity {
     public void goToMain(View view) {
         Toast.makeText(this, "HomePage", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(PopupActivity.this, MainActivity.class);
+        intent.putExtra("profilePic", mCurrentPhotoPath);
         startActivity(intent);
     }
 
@@ -77,16 +80,19 @@ public class PopupActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             camera.setImageBitmap(imageBitmap);
+
         }
     }
 
+
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
+        String imageFileName = "PROFILE_JPEG_" + timeStamp + "_";
         File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,
@@ -95,6 +101,14 @@ public class PopupActivity extends AppCompatActivity {
         );
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
+    }
+
+    private void addPicToGallery() throws IOException {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = createImageFile();
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
     }
 
 }
