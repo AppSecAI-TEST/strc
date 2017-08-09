@@ -1,7 +1,6 @@
 package com.sweatshop.storycal.presentationlayer.import_photo_gallery;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,7 +13,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,15 +25,10 @@ import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
 import com.sweatshop.storycal.presentationlayer.edit.EditPostActivity;
-import com.sweatshop.storycal.presentationlayer.home.MainActivity;
-import com.sweatshop.storycal.presentationlayer.homepage.HomepageActivity;
 import com.sweatshop.storycal.presentationlayer.import_photo_camera.ImportPhotoCameraActivity;
-import com.sweatshop.storycal.presentationlayer.main_year.MainYearActivity;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import static android.os.Build.VERSION_CODES.M;
 
 public class ImportPhotoGalleryActivity extends AppCompatActivity {
 
@@ -209,28 +202,21 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-//                final int len = thumbnailsselection.length;
-//                int cnt = 0;
-//                String selectImages = "";
-//                for (int i = 0; i < len; i++) {
-//                    if (thumbnailsselection[i]){
-//                        cnt++;
-//                        selectImages = selectImages + arrPath[i] + "|";
-//                    }
-//                }
-//                if (cnt == 0){
-//                    Toast.makeText(getApplicationContext(),
-//                            "Please select at least one image",
-//                            Toast.LENGTH_LONG).show();
-//                } else {
-//                    Toast.makeText(getApplicationContext(),
-//                            "You've selected Total " + cnt + " image(s).",
-//                            Toast.LENGTH_LONG).show();
-//                    Log.d("SelectedImages", selectImages);
-//                }
-//                Intent intent = new Intent(ImportPhotoGalleryActivity.this, EditPostActivity.class);
-//                startActivity(intent);
-                importSelectedPictures();
+                final int len = thumbnailsselection.length;
+                boolean picSelected = false;
+                for (int i = 0; i < len; i++) {
+                    if (thumbnailsselection[i]){
+                        picSelected = true;
+                        break;
+                    }
+                }
+                if (!picSelected){
+                    Toast.makeText(getApplicationContext(),
+                    "Please select at least one image",
+                    Toast.LENGTH_LONG).show();
+                } else {
+                    importSelectedPictures();
+                }
             }
         });
     }
@@ -262,5 +248,11 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
         Intent intent = new Intent(ImportPhotoGalleryActivity.this, EditPostActivity.class);
         intent.putExtra("selectedPictures", selectedPictures);
         startActivity(intent);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
     }
 }

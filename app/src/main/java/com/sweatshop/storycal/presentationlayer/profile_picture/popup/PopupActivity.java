@@ -13,9 +13,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
-import com.sweatshop.storycal.presentationlayer.homepage.HomepageActivity;
-import com.sweatshop.storycal.presentationlayer.import_photo_gallery.ImportPhotoGalleryActivity;
-import com.sweatshop.storycal.presentationlayer.main_year.MainYearActivity;
+import com.sweatshop.storycal.presentationlayer.home.MainActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,6 +45,7 @@ public class PopupActivity extends AppCompatActivity {
         View view = getSupportActionBar().getCustomView();
 
         ImageButton leftActionBtn= (ImageButton)view.findViewById(R.id.action_left);
+        leftActionBtn.setVisibility(View.GONE);
         leftActionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,18 +57,14 @@ public class PopupActivity extends AppCompatActivity {
         rightActionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Settings",Toast.LENGTH_LONG).show();
+
             }
         });
     }
 
-    public void goToFeed(View view) {
-        Intent intent = new Intent(PopupActivity.this, HomepageActivity.class);
-        startActivity(intent);
-    }
-
-    public void backToMonth(View view) {
-        Intent intent = new Intent(PopupActivity.this, MainYearActivity.class);
+    public void goToMain(View view) {
+        Toast.makeText(this, "HomePage", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(PopupActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
@@ -87,11 +82,6 @@ public class PopupActivity extends AppCompatActivity {
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             camera.setImageBitmap(imageBitmap);
         }
-    }
-
-    public void toGallery(View view){
-        Intent intent = new Intent(PopupActivity.this, ImportPhotoGalleryActivity.class);
-        startActivity(intent);
     }
 
     private File createImageFile() throws IOException {

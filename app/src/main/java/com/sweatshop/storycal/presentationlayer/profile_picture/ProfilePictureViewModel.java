@@ -1,5 +1,6 @@
 package com.sweatshop.storycal.presentationlayer.profile_picture;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.BaseObservable;
@@ -17,9 +18,14 @@ public class ProfilePictureViewModel extends BaseObservable {
         this.context = context;
     }
 
-    public void takePhoto() { context.startActivity(new Intent(context, LoginActivity.class)); }
+    public void takePhoto() {
+        context.startActivity(new Intent(context, LoginActivity.class));
+        ((Activity) context).finish();
+    }
 
-    public void importFromGallery() { context.startActivity(new Intent(context, LoginActivity.class)); }
+    public void importFromGallery() {
+        context.startActivity(new Intent(context, LoginActivity.class));
+    }
 
     public void importFromWeb() { context.startActivity(new Intent(context, LoginActivity.class)); }
 }

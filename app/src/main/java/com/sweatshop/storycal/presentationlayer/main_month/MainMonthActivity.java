@@ -10,15 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
-import com.sweatshop.storycal.applicationlayer.LocalStoreService;
 import com.sweatshop.storycal.applicationlayer.UserServiceImpl;
 import com.sweatshop.storycal.databinding.ActivityMainMonthBinding;
 import com.sweatshop.storycal.domainlayer.Album.AlbumCategory;
-import com.sweatshop.storycal.domainlayer.User.User;
 import com.sweatshop.storycal.infrastructurelayer.localStore.Repositories.PostRepositoryImpl;
 import com.sweatshop.storycal.infrastructurelayer.localStore.Repositories.UserRepositoryImpl;
 import com.sweatshop.storycal.presentationlayer.LogoutViewModel;
@@ -86,4 +83,10 @@ public class MainMonthActivity extends AppCompatActivity {
     }
 
     public void addPhoto() {}
+
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
 }

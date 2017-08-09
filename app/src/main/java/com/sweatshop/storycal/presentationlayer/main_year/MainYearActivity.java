@@ -125,4 +125,10 @@ public class MainYearActivity extends AppCompatActivity {
     }
 
     public void addPhoto() {}
+
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
 }

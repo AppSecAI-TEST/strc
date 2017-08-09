@@ -77,4 +77,9 @@ public class ProfilePictureActivity extends AppCompatActivity {
         singleBuilder.display();
     }
 
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
+
 }

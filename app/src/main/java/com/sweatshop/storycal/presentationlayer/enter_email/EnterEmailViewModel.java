@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import com.sweatshop.storycal.BR;
@@ -16,12 +17,24 @@ import com.sweatshop.storycal.presentationlayer.enter_info.EnterInfoActivity;
 
 public class EnterEmailViewModel extends BaseObservable {
     private String email = "";
+    private String name;
+    private String password;
+    private String username;
     private Context context;
     private UserService userService;
+    private EnterEmailActivity enterEmailActivity;
 
-    public EnterEmailViewModel( Context context, UserService userService) {
+    public EnterEmailViewModel( EnterEmailActivity enterEmailActivity, UserService userService) {
         this.context = context;
         this.userService = userService;
+        this.enterEmailActivity = enterEmailActivity;
+        Bundle bundle = this.enterEmailActivity.getIntent().getExtras();
+        if(bundle != null) {
+            email = bundle.getString("email");
+            name = bundle.getString("name");
+            password  = bundle.getString("password");
+            username = bundle.getString("username");
+        }
     }
 
     @Bindable
@@ -37,11 +50,20 @@ public class EnterEmailViewModel extends BaseObservable {
     public void next() {
         if(!email.equals("")) {
             if (userService.getUserByEmail(email) == null) {
-                Intent intent = new Intent(context, EnterInfoActivity.class);
+                Intent intent = new Intent(enterEmailActivity, EnterInfoActivity.class);
                 intent.putExtra("email", email);
-                context.startActivity(intent);
+                if(name != null) {
+                    intent.putExtra("name", name);
+                }
+                if(password != null) {
+                    intent.putExtra("password", password);
+                }
+                if(username != null) {
+                    intent.putExtra("username", username);
+                }
+                enterEmailActivity.startActivity(intent);
             } else {
-                Toast.makeText(context,"Email already exists", Toast.LENGTH_LONG).show();
+                Toast.makeText(enterEmailActivity,"Email already exists", Toast.LENGTH_LONG).show();
             }
         }
     }
