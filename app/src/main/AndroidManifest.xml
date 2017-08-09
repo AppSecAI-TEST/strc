@@ -59,11 +59,7 @@
         <activity android:name=".presentationlayer.gallery.GalleryActivity" />
         <activity android:name=".presentationlayer.gallery_full_image.GalleryFullImageActivity" />
         <activity android:name=".presentationlayer.face_detection.FaceDetectionActivity" />
-<<<<<<< HEAD
         <activity android:name=".presentationlayer.profile_picture.popup.PopupActivity"></activity>
-=======
-
->>>>>>> f4e0ca4264731d1c3f179cdc77d1212e40382a74
     </application>
 
 </manifest>
