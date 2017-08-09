@@ -36,7 +36,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentationlayer.login.LoginActivity"/>
-
         <activity android:name=".presentationlayer.register.RegisterActivity" />
         <activity android:name=".presentationlayer.enter_email.EnterEmailActivity" />
         <activity android:name=".presentationlayer.enter_info.EnterInfoActivity" />
@@ -60,7 +59,7 @@
         <activity android:name=".presentationlayer.gallery.GalleryActivity" />
         <activity android:name=".presentationlayer.gallery_full_image.GalleryFullImageActivity" />
         <activity android:name=".presentationlayer.face_detection.FaceDetectionActivity" />
-
+        <activity android:name=".presentationlayer.profile_picture.popup.PopupActivity" />
     </application>
 
 </manifest>

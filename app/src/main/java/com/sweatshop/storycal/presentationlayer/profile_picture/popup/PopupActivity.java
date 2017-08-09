@@ -1,8 +1,7 @@
-package com.sweatshop.storycal.presentationlayer.import_photo_camera;
+package com.sweatshop.storycal.presentationlayer.profile_picture.popup;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -15,8 +14,6 @@ import android.widget.Toast;
 
 import com.sweatshop.storycal.R;
 import com.sweatshop.storycal.presentationlayer.homepage.HomepageActivity;
-import com.sweatshop.storycal.presentationlayer.import_photo_gallery.ImportPhotoGalleryActivity;
-import com.sweatshop.storycal.presentationlayer.main_year.MainYearActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +22,8 @@ import java.util.Date;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
-public class ImportPhotoCameraActivity extends AppCompatActivity {
+public class PopupActivity extends AppCompatActivity {
+
     ImageView camera;
     Bitmap bitmap;
     String mCurrentPhotoPath;
@@ -34,12 +32,11 @@ public class ImportPhotoCameraActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_import_photo_camera);
+        setContentView(R.layout.activity_popup);
         setUpActionBar();
         camera = (ImageView)findViewById(R.id.imageCamera);
         dispatchTakePictureIntent();
     }
-
 
     private void setUpActionBar() {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -48,6 +45,7 @@ public class ImportPhotoCameraActivity extends AppCompatActivity {
         View view = getSupportActionBar().getCustomView();
 
         ImageButton leftActionBtn= (ImageButton)view.findViewById(R.id.action_left);
+        leftActionBtn.setVisibility(View.GONE);
         leftActionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,18 +57,14 @@ public class ImportPhotoCameraActivity extends AppCompatActivity {
         rightActionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Settings",Toast.LENGTH_LONG).show();
+
             }
         });
     }
 
-    public void goToFeed(View view) {
-        Intent intent = new Intent(ImportPhotoCameraActivity.this, HomepageActivity.class);
-        startActivity(intent);
-    }
-
-    public void backToMonth(View view) {
-        Intent intent = new Intent(ImportPhotoCameraActivity.this, MainYearActivity.class);
+    public void goToMain(View view) {
+        Toast.makeText(this, "HomePage", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(PopupActivity.this, HomepageActivity.class);
         startActivity(intent);
     }
 
@@ -90,11 +84,6 @@ public class ImportPhotoCameraActivity extends AppCompatActivity {
         }
     }
 
-    public void toGallery(View view){
-        Intent intent = new Intent(ImportPhotoCameraActivity.this, ImportPhotoGalleryActivity.class);
-        startActivity(intent);
-    }
-
     private File createImageFile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
@@ -108,12 +97,4 @@ public class ImportPhotoCameraActivity extends AppCompatActivity {
         return image;
     }
 
-
-    private void addPicToGallery() throws IOException {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = createImageFile();
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        this.sendBroadcast(mediaScanIntent);
-    }
 }

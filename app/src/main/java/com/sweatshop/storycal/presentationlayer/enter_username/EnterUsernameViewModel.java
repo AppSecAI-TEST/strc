@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.sweatshop.storycal.BR;
 import com.sweatshop.storycal.applicationlayer.UserService;
 import com.sweatshop.storycal.domainlayer.User.User;
-import com.sweatshop.storycal.presentationlayer.login.LoginActivity;
+import com.sweatshop.storycal.presentationlayer.fb_friends.FBFriendsActivity;
 
 /**
  * Created by arTeam on 28/07/2017.
@@ -52,7 +52,7 @@ public class EnterUsernameViewModel extends BaseObservable {
                         bundle.getString("password"),
                         bundle.getString("email")
                 ));
-                context.startActivity(new Intent(context, LoginActivity.class));
+                context.startActivity(new Intent(context, FBFriendsActivity.class));
             } else {
                 Toast.makeText(context, "Username already exists", Toast.LENGTH_LONG).show();
             }

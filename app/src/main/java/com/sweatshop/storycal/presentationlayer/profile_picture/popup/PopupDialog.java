@@ -1,6 +1,7 @@
 package com.sweatshop.storycal.presentationlayer.profile_picture.popup;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -50,7 +51,6 @@ public class PopupDialog extends BaseDialog {
         });
     }
 
-
     private void init(View view) {
 
         final TextView popupHeader = (TextView) view.findViewById(R.id.popup_header);
@@ -71,9 +71,11 @@ public class PopupDialog extends BaseDialog {
                 @Override
                 public void onClick(View view) {
                     okClicked = true;
+                    context.startActivity(new Intent(context, PopupActivity.class));
                 }
             });
         }
+
         final TextView libPhotoBtn = (TextView) view.findViewById(R.id.lib_photo_btn);
         if (libPhotoBtn != null) {
             libPhotoBtn.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +86,7 @@ public class PopupDialog extends BaseDialog {
                 }
             });
         }
+
         final TextView webImportBtn = (TextView) view.findViewById(R.id.web_import_btn);
         if (webImportBtn != null) {
             webImportBtn.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +96,7 @@ public class PopupDialog extends BaseDialog {
                 }
             });
         }
+
         final TextView cancelBtn = (TextView) view.findViewById(R.id.cancel_btn);
         if (cancelBtn != null) {
             cancelBtn.setOnClickListener(new View.OnClickListener() {
