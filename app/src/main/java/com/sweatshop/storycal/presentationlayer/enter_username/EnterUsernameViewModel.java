@@ -26,6 +26,10 @@ public class EnterUsernameViewModel extends BaseObservable {
         this.context = context;
         this.intent = intent;
         this.userService = userService;
+        Bundle bundle = intent.getExtras();
+        if(bundle != null) {
+            username = bundle.getString("username");
+        }
     }
 
     @Bindable

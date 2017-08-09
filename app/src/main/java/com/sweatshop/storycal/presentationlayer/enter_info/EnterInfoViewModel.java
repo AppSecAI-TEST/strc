@@ -18,13 +18,23 @@ public class EnterInfoViewModel extends BaseObservable {
     private String email = "";
     private String name = "";
     private String password = "";
-    private final Context context;
+    private String username = "";
+    private Context context;
+    private  EnterInfoActivity enterInfoActivity;
 
-    public EnterInfoViewModel(Context context, Intent intent) {
-        this.context = context;
+    public EnterInfoViewModel(EnterInfoActivity enterInfoActivity , Intent intent) {
         final Bundle bundle = intent.getExtras();
         email = bundle.getString("email");
+        String tempName = bundle.getString("name");
+        String tempPassword = bundle.getString("password");
+        String tempUsername = bundle.getString("username");
+        name = tempName != null ? tempName : "";
+        password = tempPassword != null ? tempPassword : "";
+        username = tempUsername != null ? tempUsername : "";
+        this.enterInfoActivity = enterInfoActivity;
     }
+
+    public String getUsername() { return username; }
 
     @Bindable
     public String getName() {
@@ -48,11 +58,12 @@ public class EnterInfoViewModel extends BaseObservable {
 
     public void next() {
         if(!name.equals("") && !password.equals("")) {
-            Intent intent = new Intent(context, EnterUsernameActivity.class);
+            Intent intent = new Intent(enterInfoActivity, EnterUsernameActivity.class);
             intent.putExtra("email", email);
             intent.putExtra("name", name);
             intent.putExtra("password", password);
-            context.startActivity(intent);
+            intent.putExtra("username", username);
+            enterInfoActivity.startActivity(intent);
 
         }
     }
