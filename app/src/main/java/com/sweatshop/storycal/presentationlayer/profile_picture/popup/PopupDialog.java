@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.sweatshop.storycal.R;
 import com.sweatshop.storycal.presentationlayer.edit.date_picker.main_date_picker.dialog.BottomSheetHelper;
-import com.sweatshop.storycal.presentationlayer.import_photo_camera.ImportPhotoCameraActivity;
 
 /**
  * Created by arTeam on 03/08/2017.
@@ -72,7 +71,7 @@ public class PopupDialog extends BaseDialog {
                 @Override
                 public void onClick(View view) {
                     okClicked = true;
-                    context.startActivity(new Intent(context, ImportPhotoCameraActivity.class));
+                    context.startActivity(new Intent(context, PopupActivity.class));
                 }
             });
         }

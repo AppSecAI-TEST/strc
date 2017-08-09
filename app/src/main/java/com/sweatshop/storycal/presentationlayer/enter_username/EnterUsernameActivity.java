@@ -21,6 +21,7 @@ import com.sweatshop.storycal.presentationlayer.enter_email.EnterEmailActivity;
 import com.sweatshop.storycal.presentationlayer.enter_info.EnterInfoActivity;
 
 public class EnterUsernameActivity extends AppCompatActivity {
+    private EnterUsernameViewModel enterUsernameViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class EnterUsernameActivity extends AppCompatActivity {
         LocalDbAdapter.init(this);
         User user = new User();
         UserService service = new UserServiceImpl(new UserRepositoryImpl(), new PostRepositoryImpl());
-        loginBinding.setReg(new EnterUsernameViewModel(this, this.getIntent(), service));
+        loginBinding.setReg(enterUsernameViewModel = new EnterUsernameViewModel(this, this.getIntent(), service));
         setUpActionBar();
     }
 
@@ -60,6 +61,9 @@ public class EnterUsernameActivity extends AppCompatActivity {
     public void back(){
         Intent intent = new Intent(EnterUsernameActivity.this, EnterInfoActivity.class);
         intent.putExtra("email", getIntent().getExtras().getString("email"));
+        intent.putExtra("name", getIntent().getExtras().getString("name"));
+        intent.putExtra("password", getIntent().getExtras().getString("password"));
+        intent.putExtra("username", enterUsernameViewModel.getUsername());
         startActivity(intent);
         finish();
     }
