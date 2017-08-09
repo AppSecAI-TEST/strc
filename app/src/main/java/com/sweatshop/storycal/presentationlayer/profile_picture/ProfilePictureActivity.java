@@ -39,7 +39,6 @@ public class ProfilePictureActivity extends AppCompatActivity {
         View view = getSupportActionBar().getCustomView();
 
         TextView leftActionBtn= (TextView)view.findViewById(R.id.action_left_signup);
-        leftActionBtn.setBackgroundResource(R.drawable.icon_bell);
         leftActionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
