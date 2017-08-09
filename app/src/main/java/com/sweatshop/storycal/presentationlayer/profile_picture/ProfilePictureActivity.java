@@ -36,7 +36,7 @@ public class ProfilePictureActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.action_bar_contact_friends);
-        View view =getSupportActionBar().getCustomView();
+        View view = getSupportActionBar().getCustomView();
 
         TextView leftActionBtn= (TextView)view.findViewById(R.id.action_left_signup);
         leftActionBtn.setOnClickListener(new View.OnClickListener() {

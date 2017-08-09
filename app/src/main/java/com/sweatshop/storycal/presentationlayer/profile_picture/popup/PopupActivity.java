@@ -1,8 +1,7 @@
-package com.sweatshop.storycal.presentationlayer.import_photo_camera;
+package com.sweatshop.storycal.presentationlayer.profile_picture.popup;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -25,7 +24,8 @@ import java.util.Date;
 
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
-public class ImportPhotoCameraActivity extends AppCompatActivity {
+public class PopupActivity extends AppCompatActivity {
+
     ImageView camera;
     Bitmap bitmap;
     String mCurrentPhotoPath;
@@ -34,12 +34,11 @@ public class ImportPhotoCameraActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_import_photo_camera);
+        setContentView(R.layout.activity_popup);
         setUpActionBar();
         camera = (ImageView)findViewById(R.id.imageCamera);
         dispatchTakePictureIntent();
     }
-
 
     private void setUpActionBar() {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -65,12 +64,12 @@ public class ImportPhotoCameraActivity extends AppCompatActivity {
     }
 
     public void goToFeed(View view) {
-        Intent intent = new Intent(ImportPhotoCameraActivity.this, HomepageActivity.class);
+        Intent intent = new Intent(PopupActivity.this, HomepageActivity.class);
         startActivity(intent);
     }
 
     public void backToMonth(View view) {
-        Intent intent = new Intent(ImportPhotoCameraActivity.this, MainYearActivity.class);
+        Intent intent = new Intent(PopupActivity.this, MainYearActivity.class);
         startActivity(intent);
     }
 
@@ -91,7 +90,7 @@ public class ImportPhotoCameraActivity extends AppCompatActivity {
     }
 
     public void toGallery(View view){
-        Intent intent = new Intent(ImportPhotoCameraActivity.this, ImportPhotoGalleryActivity.class);
+        Intent intent = new Intent(PopupActivity.this, ImportPhotoGalleryActivity.class);
         startActivity(intent);
     }
 
@@ -108,12 +107,4 @@ public class ImportPhotoCameraActivity extends AppCompatActivity {
         return image;
     }
 
-
-    private void addPicToGallery() throws IOException {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = createImageFile();
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        this.sendBroadcast(mediaScanIntent);
-    }
 }
