@@ -53,4 +53,10 @@ public class ContactFriendsActivity extends AppCompatActivity {
 
     public void cancel() { }
 
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
+
 }

@@ -16,4 +16,9 @@ public class FBPopupActivity extends AppCompatActivity {
         ActivityFbPopupBinding activityFbPopupBinding = DataBindingUtil.setContentView(this, R.layout.activity_fb_popup);
         activityFbPopupBinding.setFBPopupViewModel(new FBPopupViewModel(this));
     }
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
 }

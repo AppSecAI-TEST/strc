@@ -77,4 +77,10 @@ public class FaceDetectionActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
+
+
 }

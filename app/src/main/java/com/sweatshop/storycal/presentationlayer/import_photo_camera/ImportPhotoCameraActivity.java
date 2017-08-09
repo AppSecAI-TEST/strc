@@ -116,4 +116,10 @@ public class ImportPhotoCameraActivity extends AppCompatActivity {
         mediaScanIntent.setData(contentUri);
         this.sendBroadcast(mediaScanIntent);
     }
+
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
 }

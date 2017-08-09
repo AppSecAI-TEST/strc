@@ -28,8 +28,4 @@ public class LoginActivity extends AppCompatActivity {
         LocalDbAdapter.init(this);
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        moveTaskToBack(true);
-//    }
 }

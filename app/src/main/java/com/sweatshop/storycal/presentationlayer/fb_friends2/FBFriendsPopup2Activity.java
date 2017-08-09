@@ -79,4 +79,9 @@ public class FBFriendsPopup2Activity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
+
 }

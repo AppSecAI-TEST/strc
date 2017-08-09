@@ -17,7 +17,6 @@ import com.sweatshop.storycal.domainlayer.User.User;
 import com.sweatshop.storycal.infrastructurelayer.localStore.Repositories.PostRepositoryImpl;
 import com.sweatshop.storycal.infrastructurelayer.localStore.Repositories.UserRepositoryImpl;
 import com.sweatshop.storycal.infrastructurelayer.localStore.localDb.databaseAdapter.LocalDbAdapter;
-import com.sweatshop.storycal.presentationlayer.enter_email.EnterEmailActivity;
 import com.sweatshop.storycal.presentationlayer.enter_info.EnterInfoActivity;
 
 public class EnterUsernameActivity extends AppCompatActivity {
@@ -66,6 +65,11 @@ public class EnterUsernameActivity extends AppCompatActivity {
         intent.putExtra("username", enterUsernameViewModel.getUsername());
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
     }
 
 }

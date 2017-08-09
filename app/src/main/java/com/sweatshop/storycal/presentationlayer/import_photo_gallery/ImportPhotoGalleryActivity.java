@@ -255,4 +255,9 @@ public class ImportPhotoGalleryActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
 }

@@ -47,4 +47,9 @@ public class CreatePostActivity extends AppCompatActivity {
         Intent intent = new Intent(CreatePostActivity.this, HomepageActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
 }

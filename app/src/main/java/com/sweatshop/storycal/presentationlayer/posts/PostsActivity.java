@@ -35,4 +35,10 @@ public class PostsActivity extends AppCompatActivity {
 //
 //        activityPostsBinding.setPosts(new PostsViewModel(this));
     }
+
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
 }

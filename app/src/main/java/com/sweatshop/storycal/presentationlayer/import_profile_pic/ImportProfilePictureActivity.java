@@ -29,4 +29,9 @@ public class ImportProfilePictureActivity extends AppCompatActivity {
         Bitmap bitmap = (Bitmap)data.getExtras().get("data");
         camera.setImageBitmap(bitmap);
     }
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
 }

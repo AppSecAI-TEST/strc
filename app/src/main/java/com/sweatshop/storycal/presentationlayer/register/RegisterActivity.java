@@ -16,4 +16,9 @@ public class RegisterActivity extends AppCompatActivity {
         ActivityRegisterBinding registerBinding = DataBindingUtil.setContentView(this, R.layout.activity_register);
         registerBinding.setRegisterViewModel(new RegisterViewModel(this));
     }
+
+    @Override
+    public void onBackPressed() {
+        this.finish();
+    }
 }
