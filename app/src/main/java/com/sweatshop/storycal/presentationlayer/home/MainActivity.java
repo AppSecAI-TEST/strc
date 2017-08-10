@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_PERMISSIONS = 100;
     private int size;
-    private String mCurrentPhotoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setMain(mainViewModel = new MainViewModel(this, new User(),new UserServiceImpl(new UserRepositoryImpl(), new PostRepositoryImpl())));
-
-        ImageView profPicImage = (ImageView)findViewById(R.id.profileImage_Img);
-
 
         if ((ContextCompat.checkSelfPermission(getApplicationContext(),
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) && (ContextCompat.checkSelfPermission(getApplicationContext(),
