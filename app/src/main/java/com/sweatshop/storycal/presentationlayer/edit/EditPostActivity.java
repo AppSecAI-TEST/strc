@@ -97,6 +97,10 @@ public class EditPostActivity extends AppCompatActivity {
         String datePickerEdit = datePicker.getText().toString();
         String postMessageEdit = postMessage.getText().toString();
         Toast.makeText(this, titleEdit + "\n" + datePickerEdit + "\n" + postMessageEdit, Toast.LENGTH_SHORT).show();
+        if (titleEdit.isEmpty() || datePickerEdit.isEmpty() || postMessageEdit.isEmpty()) {
+            Toast.makeText(this, "Fill all Fields!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Intent intent = new Intent(EditPostActivity.this, MainActivity.class);
         intent.putExtra("album", selectedPictures);
@@ -153,7 +157,6 @@ public class EditPostActivity extends AppCompatActivity {
                         singleText.setText(simpleDateFormat.format(date));
                     }
                 });
-        Toast.makeText(this, month, Toast.LENGTH_LONG).show();
         singleBuilder.display();
     }
 
