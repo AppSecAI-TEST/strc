@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -89,6 +90,14 @@ public class EditPostActivity extends AppCompatActivity {
 
 
     public void publishAlbum() {
+        EditText title = (EditText)findViewById(R.id.editText_title);
+        EditText datePicker = (EditText)findViewById(R.id.singleText);
+        EditText postMessage = (EditText)findViewById(R.id.editText_post_message);
+        String titleEdit = title.getText().toString();
+        String datePickerEdit = datePicker.getText().toString();
+        String postMessageEdit = postMessage.getText().toString();
+        Toast.makeText(this, titleEdit + "\n" + datePickerEdit + "\n" + postMessageEdit, Toast.LENGTH_SHORT).show();
+
         Intent intent = new Intent(EditPostActivity.this, MainActivity.class);
         intent.putExtra("album", selectedPictures);
         LocalStoreService localStoreService = new LocalStoreService();
@@ -112,26 +121,11 @@ public class EditPostActivity extends AppCompatActivity {
     public void simpleClicked() {
 
         final Calendar calendar = Calendar.getInstance();
-//        calendar.set(Calendar.DAY_OF_MONTH, 8);
-//        calendar.set(Calendar.MONTH, 0);
         calendar.set(Calendar.YEAR, 2017);
-        final Date minDate = calendar.getTime();
-
-//        calendar.set(Calendar.DAY_OF_MONTH, 5);
-        final Date maxDate = calendar.getTime();
-
-//        calendar.set(Calendar.DAY_OF_MONTH, 2);
-        final Date defaultDate = calendar.getTime();
 
         singleBuilder = new SingleDateAndTimePickerDialog.Builder(this)
                 .bottomSheet()
                 .curved()
-//              .displayHours(false)
-//              .displayMinutes(false)
-//                .defaultDate(defaultDate)
-//                .minDateRange(minDate)
-//                .maxDateRange(maxDate)
-
                 .displayListener(new SingleDateAndTimePickerDialog.DisplayListener() {
                     @Override
                     public void onDisplayed(SingleDateAndTimePicker picker) {
