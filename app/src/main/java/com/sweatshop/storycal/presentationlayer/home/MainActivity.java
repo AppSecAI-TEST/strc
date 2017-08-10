@@ -76,22 +76,25 @@ public class MainActivity extends AppCompatActivity {
         Cursor imagecursor = getContentResolver().query(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, null,
                 null, orderBy);
-        int image_column_index = imagecursor.getColumnIndex(MediaStore.Images.Media._ID);
-        this.size = imagecursor.getCount();
-
-        imagecursor.moveToPosition(this.size - 1);
-        int id = imagecursor.getInt(image_column_index);
-        int dataColumnIndex = imagecursor.getColumnIndex(MediaStore.Images.Media.DATA);
-        Bitmap thumbnail = MediaStore.Images.Thumbnails.getThumbnail(
-                getApplicationContext().getContentResolver(), id,
-                MediaStore.Images.Thumbnails.MICRO_KIND, null
-        );
+        if(imagecursor.moveToFirst()) {
+            int image_column_index = imagecursor.getColumnIndex(MediaStore.Images.Media._ID);
+            this.size = imagecursor.getCount();
+            if (this.size > 0) {
+                imagecursor.moveToPosition(this.size - 1);
+                int id = imagecursor.getInt(image_column_index);
+                int dataColumnIndex = imagecursor.getColumnIndex(MediaStore.Images.Media.DATA);
+                Bitmap thumbnail = MediaStore.Images.Thumbnails.getThumbnail(
+                        getApplicationContext().getContentResolver(), id,
+                        MediaStore.Images.Thumbnails.MICRO_KIND, null
+                );
 
 //        mCurrentPhotoPath = imagecursor.getString(dataColumnIndex);
-        ImageView profPic = (ImageView) findViewById(R.id.profileImage_Img);
-        profPic.setImageBitmap(thumbnail);
+                ImageView profPic = (ImageView) findViewById(R.id.profileImage_Img);
+                profPic.setImageBitmap(thumbnail);
 
-        imagecursor.close();
+                imagecursor.close();
+            }
+        }
     }
 
     private void setUpActionBar() {
