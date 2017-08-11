@@ -26,7 +26,7 @@ public class CreatePostActivity extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.action_bar_createpost);
         View view =getSupportActionBar().getCustomView();
 
-        TextView leftActionBtn= (TextView)view.findViewById(R.id.action_left);
+        TextView leftActionBtn = (TextView)view.findViewById(R.id.action_left);
         leftActionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,7 +34,7 @@ public class CreatePostActivity extends AppCompatActivity {
             }
         });
 
-        TextView rightActionBtn= (TextView)view.findViewById(R.id.action_right);
+        TextView rightActionBtn = (TextView)view.findViewById(R.id.action_right);
         rightActionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
