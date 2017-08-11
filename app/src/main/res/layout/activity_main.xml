@@ -263,13 +263,19 @@
         </LinearLayout>
 
         <View
-            android:id="@+id/divider2"
+            android:id="@+id/divider1"
             style="@style/Divider"
             android:layout_width="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/home_btn"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/age_job"
+            app:layout_constraintVertical_bias="1.0"
+            tools:layout_constraintBottom_creator="1"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintTop_creator="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -346,19 +352,13 @@
         </LinearLayout>
 
         <View
-            android:id="@+id/divider1"
+            android:id="@+id/divider2"
             style="@style/Divider"
             android:layout_width="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/home_btn"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/age_job"
-            app:layout_constraintVertical_bias="1.0"
-            tools:layout_constraintBottom_creator="1"
-            tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintRight_creator="1"
-            tools:layout_constraintTop_creator="1" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:layout_width="match_parent"
