@@ -19,7 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="1142dp">
 
@@ -34,9 +34,9 @@
                 android:layout_marginTop="5dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
+                android:text="@={main.name}"
                 android:textColor="#333333"
                 android:textStyle="bold"
-                android:text="@={main.name}"
                 app:layout_constraintBottom_toTopOf="@+id/profileImage_Img"
                 app:layout_constraintHorizontal_bias="0.047"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -112,7 +112,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="@={main.numStories}"
+                        android:text="@string/stories_lbl"
                         android:textAlignment="center"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -221,7 +221,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -272,9 +272,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:weightSum="4"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="1304dp">
@@ -283,8 +285,6 @@
                 android:id="@+id/home_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:contentDescription="@string/homepage_profile_btn"
@@ -301,8 +301,6 @@
                 android:id="@+id/notifications_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:contentDescription="@string/notification_profile_btn"
@@ -318,8 +316,6 @@
                 android:id="@+id/tag_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:contentDescription="@string/bookmark_profile_btn"
@@ -335,8 +331,6 @@
                 android:id="@+id/search_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="28dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:contentDescription="@string/search_profile_btn"
