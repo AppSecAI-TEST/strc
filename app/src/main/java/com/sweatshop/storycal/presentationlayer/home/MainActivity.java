@@ -53,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setMain(mainViewModel = new MainViewModel(this, new User(),new UserServiceImpl(new UserRepositoryImpl(), new PostRepositoryImpl())));
 
+        addImage();
+
+        setUpActionBar();
+        setRecyclerView();
+    }
+
+    private void addImage() {
         if ((ContextCompat.checkSelfPermission(getApplicationContext(),
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) && (ContextCompat.checkSelfPermission(getApplicationContext(),
                 Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
@@ -64,36 +71,27 @@ public class MainActivity extends AppCompatActivity {
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
                         REQUEST_PERMISSIONS);
             }
-        }else { addImage(); }
+        } else {
 
-        setUpActionBar();
-        setRecyclerView();
-    }
-
-    private void addImage() {
-        final String[] columns = { MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID };
-        final String orderBy = MediaStore.Images.Media._ID;
-        Cursor imagecursor = getContentResolver().query(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, null,
-                null, orderBy);
-        if(imagecursor.moveToFirst()) {
+            final String[] columns = { MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID };
+            final String orderBy = MediaStore.Images.Media._ID;
+            Cursor imagecursor = getContentResolver().query(
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns, null,
+                    null, orderBy);
             int image_column_index = imagecursor.getColumnIndex(MediaStore.Images.Media._ID);
             this.size = imagecursor.getCount();
-            if (this.size > 0) {
-                imagecursor.moveToPosition(this.size - 1);
-                int id = imagecursor.getInt(image_column_index);
-                int dataColumnIndex = imagecursor.getColumnIndex(MediaStore.Images.Media.DATA);
-                Bitmap thumbnail = MediaStore.Images.Thumbnails.getThumbnail(
-                        getApplicationContext().getContentResolver(), id,
-                        MediaStore.Images.Thumbnails.MICRO_KIND, null
-                );
 
-//        mCurrentPhotoPath = imagecursor.getString(dataColumnIndex);
-                ImageView profPic = (ImageView) findViewById(R.id.profileImage_Img);
-                profPic.setImageBitmap(thumbnail);
+            imagecursor.moveToPosition(this.size - 1);
+            int id = imagecursor.getInt(image_column_index);
+            Bitmap thumbnail = MediaStore.Images.Thumbnails.getThumbnail(
+                    getApplicationContext().getContentResolver(), id,
+                    MediaStore.Images.Thumbnails.MICRO_KIND, null
+            );
 
-                imagecursor.close();
-            }
+            ImageView profPic = (ImageView) findViewById(R.id.profileImage_Img);
+            profPic.setImageBitmap(thumbnail);
+
+            imagecursor.close();
         }
     }
 
